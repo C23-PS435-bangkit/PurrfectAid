@@ -4,20 +4,20 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/icon_style_home"
-        android:title="Home" />
-
-    <item
-        android:id="@+id/communityFragment"
-        android:icon="@drawable/icon_style_community"
-        android:title="Community" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/scanFragment"
         android:icon="@drawable/icon_style_scan"
-        android:title="Scan" />
+        android:title="@string/scan" />
+
+    <item
+        android:id="@+id/communityFragment"
+        android:icon="@drawable/icon_style_community"
+        android:title="@string/community" />
 
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/icon_style_profile"
-        android:title="Profile" />
+        android:title="@string/profile" />
 </menu>

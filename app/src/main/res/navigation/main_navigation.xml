@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/openingFirstFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -25,4 +25,27 @@
         android:name="com.bangkit.purrfectaid.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/openingFirstFragment"
+        android:name="com.bangkit.purrfectaid.presentation.opening.OpeningFirstFragment"
+        android:label="fragment_opening_first"
+        tools:layout="@layout/fragment_opening_first" >
+        <action
+            android:id="@+id/action_openingFirstFragment_to_openingSecondFragment"
+            app:destination="@id/openingSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openingSecondFragment"
+        android:name="com.bangkit.purrfectaid.presentation.opening.OpeningSecondFragment"
+        android:label="fragment_opening_second"
+        tools:layout="@layout/fragment_opening_second" >
+        <action
+            android:id="@+id/action_openingSecondFragment_to_openingThirdFragment"
+            app:destination="@id/openingThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openingThirdFragment"
+        android:name="com.bangkit.purrfectaid.presentation.opening.OpeningThirdFragment"
+        android:label="fragment_opening_third"
+        tools:layout="@layout/fragment_opening_third" />
 </navigation>
