@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.homeFragment -> View.VISIBLE
                     R.id.scanFragment -> View.VISIBLE
                     R.id.communityFragment -> View.VISIBLE
-                    R.id.profileFragment -> View.VISIBLE
+//                    R.id.profileFragment -> View.VISIBLE
+                    R.id.vetFragment -> View.VISIBLE
                     else -> View.GONE
                 }
             }

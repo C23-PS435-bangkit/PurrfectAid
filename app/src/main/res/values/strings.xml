@@ -9,9 +9,21 @@
     <string name="ilustration">Ilustration</string>
     <string name="next">Next</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
-    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit</string>
+    <string name="lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consec…</string>
     <string name="_1_of_3">1 of 3</string>
     <string name="_2_of_3">2 of 3</string>
     <string name="sign_up_or_sign_in">Sign Up or Sign In</string>
     <string name="_3_of_3">3 of 3</string>
+    <string name="vet">Vet</string>
+    <string name="read_more"><u>Read more</u></string>
+    <string name="placeholder_trending_title">Does this cat really have fleas issue?</string>
+    <string name="see_more">See more</string>
+    <string name="placeholder_date_diagnose">Wed, Jan 18 2023</string>
+    <string name="scabies">Scabies</string>
+    <string name="to_detail_diagnose">To detail diagnose</string>
+    <string name="diagnose_history">Diagnose History</string>
+    <string name="trending_on_community">Trending on Community</string>
+    <string name="welcome">Welcome!</string>
+    <string name="hello_with_name">Hello, Hakim!</string>
+    <string name="logo">Purrfect Aid</string>
 </resources>

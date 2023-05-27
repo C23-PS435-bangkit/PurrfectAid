@@ -47,5 +47,14 @@
         android:id="@+id/openingThirdFragment"
         android:name="com.bangkit.purrfectaid.presentation.opening.OpeningThirdFragment"
         android:label="fragment_opening_third"
-        tools:layout="@layout/fragment_opening_third" />
+        tools:layout="@layout/fragment_opening_third" >
+        <action
+            android:id="@+id/action_openingThirdFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vetFragment"
+        android:name="com.bangkit.purrfectaid.presentation.vet.VetFragment"
+        android:label="fragment_vet"
+        tools:layout="@layout/fragment_vet" />
 </navigation>

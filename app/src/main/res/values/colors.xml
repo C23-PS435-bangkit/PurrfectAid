@@ -5,4 +5,6 @@
 
     <color name="blue">#4F6BFF</color>
     <color name="surface">#F3F5FF</color>
+
+    <color name="textColor">#7974C1</color>
 </resources>

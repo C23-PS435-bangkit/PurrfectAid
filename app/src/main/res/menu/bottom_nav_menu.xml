@@ -17,7 +17,7 @@
         android:title="@string/community" />
 
     <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/icon_style_profile"
-        android:title="@string/profile" />
+        android:id="@+id/vetFragment"
+        android:icon="@drawable/icon_style_vet"
+        android:title="@string/vet" />
 </menu>

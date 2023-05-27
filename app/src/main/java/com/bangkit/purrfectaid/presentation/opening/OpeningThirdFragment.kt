@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bangkit.purrfectaid.R
-import com.bangkit.purrfectaid.databinding.FragmentOpeningFirstBinding
+import androidx.navigation.fragment.findNavController
 import com.bangkit.purrfectaid.databinding.FragmentOpeningThirdBinding
 
 class OpeningThirdFragment : Fragment() {
@@ -19,6 +18,11 @@ class OpeningThirdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOpeningThirdBinding.inflate(inflater, container, false)
+
+        binding.thirdOpeningButton.setOnClickListener {
+            val toHome = OpeningThirdFragmentDirections.actionOpeningThirdFragmentToHomeFragment()
+            findNavController().navigate(toHome)
+        }
 
         return binding.root
     }
