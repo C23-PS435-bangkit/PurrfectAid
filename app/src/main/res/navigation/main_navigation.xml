@@ -49,12 +49,30 @@
         android:label="fragment_opening_third"
         tools:layout="@layout/fragment_opening_third" >
         <action
-            android:id="@+id/action_openingThirdFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_openingThirdFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/vetFragment"
         android:name="com.bangkit.purrfectaid.presentation.vet.VetFragment"
         android:label="fragment_vet"
         tools:layout="@layout/fragment_vet" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.bangkit.purrfectaid.presentation.auth.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bangkit.purrfectaid.presentation.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
 </navigation>

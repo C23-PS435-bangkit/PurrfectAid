@@ -6,6 +6,7 @@
         <item name="colorPrimaryDark">@color/blue</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnPrimary">@color/blue</item>
+        <item name="colorSecondaryContainer">@android:color/transparent</item>
 <!--        <item name="textcolorse"-->
 <!--        <item name=""-->
         <item name="android:textColorSecondary">@color/blue</item>
@@ -21,6 +22,18 @@
     <style name="roundedImage" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
+    </style>
+    
+    <style name="TextInputCustomStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/textColor</item>
+        <item name="boxStrokeWidth">5dp</item>
+    </style>
+    
+    <style name="CustomOutlinedTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
     </style>
 
 </resources>

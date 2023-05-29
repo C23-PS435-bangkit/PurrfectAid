@@ -20,8 +20,8 @@ class OpeningThirdFragment : Fragment() {
         _binding = FragmentOpeningThirdBinding.inflate(inflater, container, false)
 
         binding.thirdOpeningButton.setOnClickListener {
-            val toHome = OpeningThirdFragmentDirections.actionOpeningThirdFragmentToHomeFragment()
-            findNavController().navigate(toHome)
+            val toRegister = OpeningThirdFragmentDirections.actionOpeningThirdFragmentToRegisterFragment()
+            findNavController().navigate(toRegister)
         }
 
         return binding.root

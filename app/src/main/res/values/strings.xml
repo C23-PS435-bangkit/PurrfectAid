@@ -26,4 +26,15 @@
     <string name="welcome">Welcome!</string>
     <string name="hello_with_name">Hello, Hakim!</string>
     <string name="logo">Purrfect Aid</string>
+    <string name="registration">Registration</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirmation_password">Confirmation Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="login_with_google">Login with google</string>
+    <string name="or">or</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 </resources>
