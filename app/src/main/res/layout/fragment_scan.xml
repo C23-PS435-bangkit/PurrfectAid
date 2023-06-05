@@ -1,13 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.scan.ScanFragment">
 
-    <TextView
+    <androidx.camera.view.PreviewView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="SCAN" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.Icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="50dp"
+        app:icon="@drawable/ic_left"
+        app:iconPadding="0dp"
+        app:iconTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp" />
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_focus"
+        app:layout_constraintBottom_toTopOf="@id/cv_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_select"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_70"
+        app:shapeAppearanceOverlay="@style/CardViewScan"
+        app:strokeColor="@color/blue"
+        app:strokeWidth="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_dog"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="30dp"
+                android:src="@drawable/ic_dog"
+                app:layout_constraintEnd_toStartOf="@id/guideline_50"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_dog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dog"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/iv_dog"
+                app:layout_constraintStart_toStartOf="@id/iv_dog"
+                app:layout_constraintTop_toBottomOf="@id/iv_dog" />
+
+            <ImageView
+                android:id="@+id/iv_cat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="30dp"
+                android:src="@drawable/ic_cat"
+                app:layout_constraintStart_toEndOf="@id/guideline_50"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cat"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/iv_cat"
+                app:layout_constraintStart_toStartOf="@id/iv_cat"
+                app:layout_constraintTop_toBottomOf="@id/iv_cat" />
+
+            <View
+                android:id="@+id/v_line_separate"
+                android:layout_width="2dp"
+                android:layout_height="0dp"
+                android:background="@color/blue"
+                app:layout_constraintBottom_toBottomOf="@id/tv_dog"
+                app:layout_constraintEnd_toEndOf="@id/guideline_50"
+                app:layout_constraintStart_toStartOf="@id/guideline_50"
+                app:layout_constraintTop_toTopOf="@id/iv_dog" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/tv_instruction_position_scan"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lines="2"
+                android:text="@string/instruction_position_scan"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                app:layout_constraintEnd_toEndOf="@id/guideline_50"
+                app:layout_constraintStart_toStartOf="@id/guideline_50"
+                app:layout_constraintTop_toBottomOf="@id/v_line_separate" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                app:cornerRadius="30dp"
+                app:icon="@drawable/menu_scan"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline_50"
+                app:layout_constraintStart_toStartOf="@id/guideline_50"
+                app:layout_constraintTop_toBottomOf="@id/tv_instruction_position_scan" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

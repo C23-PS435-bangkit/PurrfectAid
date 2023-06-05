@@ -36,4 +36,14 @@
         <item name="boxCornerRadiusTopStart">10dp</item>
     </style>
 
+<!--    <style name="CardViewScan" parent="@style/Widget.MaterialComponents.CardView">-->
+<!--        <item name="shapeAppearanceOverlay"-->
+<!--    </style>-->
+
+    <style name="CardViewScan" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">30dp</item>
+        <item name="cornerSizeTopRight">30dp</item>
+    </style>
+
 </resources>
