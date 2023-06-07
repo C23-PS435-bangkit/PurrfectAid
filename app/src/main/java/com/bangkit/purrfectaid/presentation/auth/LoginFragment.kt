@@ -25,6 +25,11 @@ class LoginFragment : Fragment() {
             findNavController().navigate(toRegister)
         }
 
+        binding.btnLogin.setOnClickListener {
+            val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            findNavController().navigate(toHome)
+        }
+
         return binding.root
     }
 
