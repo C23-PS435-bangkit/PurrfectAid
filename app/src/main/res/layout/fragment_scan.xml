@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/fragment_scan"
     android:layout_height="match_parent"
     tools:context=".presentation.scan.ScanFragment">
 
     <androidx.camera.view.PreviewView
+        android:id="@+id/pv_scan"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +36,7 @@
         app:strokeWidth="1dp" />
 
     <ImageView
+        android:id="@+id/btn_gallery"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="20dp"
