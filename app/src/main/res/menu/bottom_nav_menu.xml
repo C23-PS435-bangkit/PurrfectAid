@@ -7,9 +7,9 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/LALAL"
-        android:icon="@drawable/icon_style_scan"
-        android:title="@string/scan" />
+        android:id="@+id/vetFragment"
+        android:icon="@drawable/icon_style_vet"
+        android:title="@string/vet" />
 
     <item
         android:id="@+id/scanFragment"
@@ -21,7 +21,8 @@
         android:title="@string/community" />
 
     <item
-        android:id="@+id/vetFragment"
-        android:icon="@drawable/icon_style_vet"
-        android:title="@string/vet" />
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/icon_style_profile"
+        android:title="@string/profile" />
+
 </menu>
