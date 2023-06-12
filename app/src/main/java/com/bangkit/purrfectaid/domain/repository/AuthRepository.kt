@@ -13,6 +13,6 @@ import com.bangkit.purrfectaid.utils.Result
 interface AuthRepository {
 
     fun login(request: LoginRequest) : LiveData<Result<LoginResponse>>
-
     fun register(request: RegisterRequest) : LiveData<Result<RegisterResponse>>
+    suspend fun logout() : Boolean
 }

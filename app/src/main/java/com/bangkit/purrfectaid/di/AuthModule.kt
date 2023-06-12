@@ -2,6 +2,9 @@ package com.bangkit.purrfectaid.di
 
 import com.bangkit.purrfectaid.BuildConfig
 import com.bangkit.purrfectaid.data.remote.ApiAuth
+import com.bangkit.purrfectaid.data.repository.AuthRepositoryImpl
+import com.bangkit.purrfectaid.domain.repository.AuthRepository
+import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
 import com.bangkit.purrfectaid.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -44,4 +47,9 @@ object AuthModule {
             .create(ApiAuth::class.java)
 
 
+    @Provides
+    @Singleton
+    fun provideAuthRepository(api: ApiAuth, dataStore: DataStoreRepository) : AuthRepository {
+        return AuthRepositoryImpl(api, dataStore)
+    }
 }

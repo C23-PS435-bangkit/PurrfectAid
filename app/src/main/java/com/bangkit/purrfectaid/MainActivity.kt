@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.core.view.marginBottom
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -20,6 +22,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.util.Stack
 
 @AndroidEntryPoint
@@ -27,15 +30,34 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHost: NavHostFragment
-    private val fragmentStack = Stack<Int>()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         navHost =
             supportFragmentManager.findFragmentById(binding.mainFragmentContainer.id) as NavHostFragment
+
+        val inflater = navHost.navController.navInflater
+        val graph = inflater.inflate(R.navigation.main_navigation)
+
+
+        lifecycleScope.launch {
+            if (viewModel.getToken() != null) {
+                graph.setStartDestination(R.id.homeFragment)
+                navHost.navController.graph = graph
+            } else {
+                graph.setStartDestination(R.id.openingFirstFragment)
+                navHost.navController.graph = graph
+            }
+        }
+        setContentView(binding.root)
+
+
+
+
+
         binding.bottomNav.setupWithNavController(navHost.navController)
 
         binding.bottomNav.setOnItemSelectedListener {
