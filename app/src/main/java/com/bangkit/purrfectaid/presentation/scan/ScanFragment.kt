@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentScanBinding
 import com.bangkit.purrfectaid.utils.uriToFile
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 
@@ -43,6 +44,13 @@ class ScanFragment : Fragment() {
 
         binding.btnGallery.setOnClickListener {
             launchGallery()
+        }
+
+        binding.btnCancelScan.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnScan.setOnClickListener {
         }
     }
 

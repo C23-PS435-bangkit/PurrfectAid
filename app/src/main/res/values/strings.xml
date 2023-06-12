@@ -40,4 +40,6 @@
     <string name="cat">Cat</string>
     <string name="dog">Dog</string>
     <string name="instruction_position_scan">Please position the target skin in the highlighted box</string>
+
+    <string name="scanFragment">scanFragment</string>
 </resources>

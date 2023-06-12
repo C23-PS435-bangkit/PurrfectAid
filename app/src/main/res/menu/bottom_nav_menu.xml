@@ -7,9 +7,13 @@
         android:title="@string/home" />
 
     <item
-        android:id="@+id/scanFragment"
+        android:id="@+id/LALAL"
         android:icon="@drawable/icon_style_scan"
         android:title="@string/scan" />
+
+    <item
+        android:id="@+id/scanFragment"
+        android:title="" />
 
     <item
         android:id="@+id/communityFragment"

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentRegisterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
