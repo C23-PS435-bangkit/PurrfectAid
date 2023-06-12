@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.purrfectaid.R
@@ -38,30 +39,54 @@ class LoginFragment : Fragment() {
             findNavController().navigate(toRegister)
         }
 
-        binding.apply {
-            btnLogin.setOnClickListener {
-                val loginRequest = LoginRequest(
-                    email = edLoginEmail.text.toString(),
-                    password = edLoginPassword.text.toString()
-                )
+        binding.btnLogin.setOnClickListener {
+            val loginRequest = LoginRequest(
+                email = binding.edLoginEmail.text.toString(),
+                password = binding.edLoginPassword.text.toString()
+            )
+            login(loginRequest)
+        }
 
-                viewModel.login(loginRequest).observe(viewLifecycleOwner) {
-                    when (it) {
-                        is Result.Success -> {
-                            if(it.data.status == 200) {
-                                val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                                findNavController().navigate(toHome)
-                            }
-                        }
-
-                        is Result.Loading -> {
-
-                        }
-
-                        is Result.Error -> {
-                            Log.e("Error Login", "Error: ${it.errorMessage}")
+        binding.btnLoginWithGoogle.setOnClickListener {
+            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
+                when (it) {
+                    is Result.Success -> {
+                        if (it.data.status == 200) {
+                            Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
+                            val tohome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                            findNavController().navigate(tohome)
                         }
                     }
+
+                    is Result.Loading -> {
+
+                    }
+
+                    is Result.Error -> {
+                        Log.e("Error Login Google", "Error: ${it.errorMessage}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun login(loginRequest: LoginRequest) {
+        viewModel.login(loginRequest).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    if (it.data.status == 200) {
+                        Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
+                        val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                        findNavController().navigate(toHome)
+                    }
+                }
+
+                is Result.Loading -> {
+
+                }
+
+                is Result.Error -> {
+                    Log.e("Error Login", "Error: ${it.errorMessage}")
                 }
             }
         }

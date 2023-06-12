@@ -53,6 +53,24 @@ class AuthRepositoryImpl (private val apiAuth: ApiAuth, private val dataStore: D
         }
     }
 
+    override fun registerOrLoginWithGoogle(): LiveData<Result<LoginResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            apiAuth.loginWithGoogle().let {
+                if (it.isSuccessful) {
+                    val body = it.body()!!
+                    dataStore.setToken(body.token)
+                    emit(Result.Success(body))
+                } else {
+                    val errorMessage = it.getError<ErrorResponse>().msg
+                    emit(Result.Error(errorMessage))
+                }
+            }
+        } catch (e: Exception) {
+            emit(Result.Error(e.message ?: "Terjadi kesalahan saat login dengan google"))
+        }
+    }
+
     override suspend fun logout(): Boolean {
         return dataStore.logout()
     }

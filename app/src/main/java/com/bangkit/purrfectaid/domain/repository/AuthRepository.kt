@@ -15,4 +15,5 @@ interface AuthRepository {
     fun login(request: LoginRequest) : LiveData<Result<LoginResponse>>
     fun register(request: RegisterRequest) : LiveData<Result<RegisterResponse>>
     suspend fun logout() : Boolean
+    fun registerOrLoginWithGoogle() : LiveData<Result<LoginResponse>>
 }

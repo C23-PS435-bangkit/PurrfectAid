@@ -39,32 +39,56 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(toLogin)
         }
 
-        binding.apply {
-            btnRegister.setOnClickListener {
-                val registerRequest = RegisterRequest(
-                    email = edRegisterEmail.text.toString(),
-                    username = edRegisterName.text.toString(),
-                    password = edRegisterPassword.text.toString()
-                )
+        binding.btnRegister.setOnClickListener {
+            val registerRequest = RegisterRequest(
+                email = binding.edRegisterEmail.text.toString(),
+                username = binding.edRegisterName.text.toString(),
+                password = binding.edRegisterPassword.text.toString()
+            )
+            register(registerRequest)
+        }
 
-                viewModel.register(registerRequest).observe(viewLifecycleOwner) {
-                    when (it) {
-                        is Result.Success -> {
-                            if (it.data.status == 200) {
-                                Toast.makeText(requireContext(), "Register berhasil, silahkan login", Toast.LENGTH_SHORT).show()
-                                val toLogin = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-                                findNavController().navigate(toLogin)
-                            }
-                        }
-
-                        is Result.Loading -> {
-
-                        }
-
-                        is Result.Error -> {
-                            Log.e("Error Register", "Error: ${it.errorMessage}")
-                        }
+        binding.btnRegisterWithGoogle.setOnClickListener {
+            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
+                when (it) {
+                    is Result.Success -> {
+                        Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
+                        val toHome =
+                            RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
+                        findNavController().navigate(toHome)
                     }
+
+                    is Result.Loading -> {
+
+                    }
+
+                    is Result.Error -> {
+                        Log.e("Error Register Google", "Error: ${it.errorMessage}")
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun register(registerRequest: RegisterRequest) {
+        viewModel.register(registerRequest).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    if (it.data.status == 200) {
+                        Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
+                        val toLogin =
+                            RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                        findNavController().navigate(toLogin)
+                    }
+                }
+
+                is Result.Loading -> {
+
+                }
+
+                is Result.Error -> {
+                    Log.e("Error Register", "Error: ${it.errorMessage}")
                 }
             }
         }

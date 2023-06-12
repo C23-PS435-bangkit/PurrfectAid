@@ -12,6 +12,7 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepository) : View
     // TODO: Implement the ViewModel
 
     fun login(loginRequest: LoginRequest) = repo.login(loginRequest)
-
     fun register(registerRequest: RegisterRequest) = repo.register(registerRequest)
+
+    fun registerOrLoginWithGoogle() = repo.registerOrLoginWithGoogle()
 }
