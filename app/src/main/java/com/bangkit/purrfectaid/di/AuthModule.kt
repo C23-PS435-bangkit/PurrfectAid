@@ -40,9 +40,9 @@ object AuthModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .readTimeout(60, TimeUnit.SECONDS)
-                .build())
+                    .addInterceptor(loggingInterceptor)
+                    .readTimeout(60, TimeUnit.SECONDS)
+                    .build())
             .build()
             .create(ApiAuth::class.java)
 

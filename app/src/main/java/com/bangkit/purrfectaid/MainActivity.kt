@@ -55,9 +55,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
-
         binding.bottomNav.setupWithNavController(navHost.navController)
 
         binding.bottomNav.setOnItemSelectedListener {

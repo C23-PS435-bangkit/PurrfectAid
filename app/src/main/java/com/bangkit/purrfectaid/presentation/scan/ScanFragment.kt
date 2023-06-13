@@ -21,8 +21,10 @@ import com.bangkit.purrfectaid.databinding.FragmentScanBinding
 import com.bangkit.purrfectaid.utils.uriToFile
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class ScanFragment : Fragment() {
 
     private var _binding: FragmentScanBinding? = null
