@@ -14,7 +14,7 @@ interface ApiPredict {
 
     @Multipart
     @POST("predict")
-    fun predict(
+    suspend fun predict(
         @Part image: MultipartBody.Part
     ) : Response<Predict>
 }

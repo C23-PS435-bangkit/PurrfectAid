@@ -15,4 +15,6 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepository) : View
     fun register(registerRequest: RegisterRequest) = repo.register(registerRequest)
 
     fun registerOrLoginWithGoogle() = repo.registerOrLoginWithGoogle()
+
+//    fun sendUser()
 }

@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_authGoogleFragment"
+            app:destination="@id/authGoogleFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -85,4 +88,9 @@
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/authGoogleFragment"
+        android:name="com.bangkit.purrfectaid.presentation.auth.AuthGoogleFragment"
+        android:label="fragment_auth_google"
+        tools:layout="@layout/fragment_auth_google" />
 </navigation>

@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+        val uri = intent.data
+        if (uri != null) {
+            Log.d("BErhasil", "BER")
+        }
+
         navHost =
             supportFragmentManager.findFragmentById(binding.mainFragmentContainer.id) as NavHostFragment
 

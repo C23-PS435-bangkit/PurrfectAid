@@ -1,5 +1,7 @@
 package com.bangkit.purrfectaid.presentation.auth
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentRegisterBinding
 import com.bangkit.purrfectaid.domain.model.RegisterRequest
+import com.bangkit.purrfectaid.utils.Constants.BASE_URL
 import com.bangkit.purrfectaid.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,24 +52,28 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnRegisterWithGoogle.setOnClickListener {
-            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
-                when (it) {
-                    is Result.Success -> {
-                        Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
-                        val toHome =
-                            RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
-                        findNavController().navigate(toHome)
-                    }
-
-                    is Result.Loading -> {
-
-                    }
-
-                    is Result.Error -> {
-                        Log.e("Error Register Google", "Error: ${it.errorMessage}")
-                    }
-                }
-            }
+//            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
+//                when (it) {
+//                    is Result.Success -> {
+//                        Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
+//                        val toHome =
+//                            RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
+//                        findNavController().navigate(toHome)
+//                    }
+//
+//                    is Result.Loading -> {
+//
+//                    }
+//
+//                    is Result.Error -> {
+//                        Log.e("Error Register Google", "Error: ${it.errorMessage}")
+//                    }
+//                }
+//            }
+//            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(BASE_URL + "users/google"))
+//            startActivity(browserIntent)
+            val toAuthGoogle = RegisterFragmentDirections.actionRegisterFragmentToAuthGoogleFragment()
+            findNavController().navigate(toAuthGoogle)
         }
 
     }

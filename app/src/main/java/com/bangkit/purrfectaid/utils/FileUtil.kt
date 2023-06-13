@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
+import com.bangkit.purrfectaid.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -41,4 +42,16 @@ fun uriToFile(selectedImage: Uri, context: Context): File {
 fun createCustomTempFile(context: Context): File {
     val storageDirectory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, ".jpg", storageDirectory)
+}
+
+fun createFile(context: Context): File {
+    val mediaDir = context.externalMediaDirs.firstOrNull()?.let {
+        File(it, context.resources.getString(R.string.app_name)).apply { mkdirs() }
+    }
+
+    val outputDirectory = if (
+        mediaDir != null && mediaDir.exists()
+    ) mediaDir else context.filesDir
+
+    return File(outputDirectory, "Photo-$timeStamp.jpg")
 }
