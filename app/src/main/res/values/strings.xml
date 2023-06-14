@@ -42,4 +42,5 @@
     <string name="instruction_position_scan">Please position the target skin in the highlighted box</string>
 
     <string name="scanFragment">scanFragment</string>
+    <string name="nearest_vet">Nearest Vet</string>
 </resources>

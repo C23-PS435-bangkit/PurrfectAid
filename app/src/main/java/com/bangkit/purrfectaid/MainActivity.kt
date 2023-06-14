@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun View.setMarginBottom() {
         val params = this.layoutParams as ViewGroup.MarginLayoutParams
-        params.bottomMargin = 56
+        params.bottomMargin = 160
     }
 
     private fun View.removeMarginBottom() {
