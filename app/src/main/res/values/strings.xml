@@ -4,7 +4,6 @@
     <string name="scan">Scan</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ilustration">Ilustration</string>
     <string name="next">Next</string>
@@ -42,4 +41,8 @@
     <string name="instruction_position_scan">Please position the target skin in the highlighted box</string>
 
     <string name="scanFragment">scanFragment</string>
+    <string name="maps_api_key">AIzaSyDxsyy92AvMeK538tjyJzTmCh5-QlHlPzs</string>
+    <string name="nearest_vet">Nearest Vet</string>
+    <string name="find_nearest_vet">Find Nearest Vet</string>
+    <string name="save_diagnose">Save Diagnose</string>
 </resources>
