@@ -1,5 +1,6 @@
 package com.bangkit.purrfectaid.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.bangkit.purrfectaid.data.remote.ApiPredict
@@ -18,13 +19,17 @@ class PredictRepositoryImpl (private val api: ApiPredict) : PredictRepository {
         try {
             api.predict(image).let {
                 if (it.isSuccessful) {
-                    val body = it.body()!!
-                    emit(Result.Success(body))
+                    Log.d("DATASA", it.message())
+                    val body = it.body().toString().replace("\"", "")
+                    Log.d("DATADATA", body.toString())
+                    emit(Result.Success(it.body()!!))
                 } else {
-                    emit(Result.Error(it.errorBody().toString()))
+                    Log.e("ERROR PREDICTSI", it.message() + it.errorBody())
+                    emit(Result.Error(it.message()))
                 }
             }
         } catch (e: Exception) {
+            Log.e("ERRUR", e.message + " dan dan $e")
             emit(Result.Error(e.message ?: "Terjadi kesalahan pada predict"))
         }
 

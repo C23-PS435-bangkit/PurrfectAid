@@ -24,6 +24,4 @@ interface ApiAuth {
         @Body request: RegisterRequest
     ): Response<RegisterResponse>
 
-    @GET("users/google")
-    suspend fun loginWithGoogle(): Response<LoginResponse>
 }

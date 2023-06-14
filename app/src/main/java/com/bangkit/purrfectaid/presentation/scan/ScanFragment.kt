@@ -22,6 +22,7 @@ import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentScanBinding
 import com.bangkit.purrfectaid.utils.Result
 import com.bangkit.purrfectaid.utils.createFile
+import com.bangkit.purrfectaid.utils.toImageMultiPart
 import com.bangkit.purrfectaid.utils.uriToFile
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -65,8 +66,10 @@ class ScanFragment : Fragment() {
         }
     }
 
+
+
     private fun takeImage() {
-        val imageCap = imageCapture ?: return
+        val imageCap = imageCapture
 
         val imageFile = createFile(requireContext())
         val outputOptions = ImageCapture.OutputFileOptions.Builder(imageFile).build()
@@ -76,11 +79,12 @@ class ScanFragment : Fragment() {
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    imageFile
+                    predict(imageFile.toImageMultiPart())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(requireContext(), "Failed to capture image", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         )
@@ -94,18 +98,9 @@ class ScanFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 val file = uriToFile(uri, requireActivity())
-
-                val requestImageFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val imageMultiPart = MultipartBody.Part.createFormData("image", file.name, requestImageFile)
-
-                predict(imageMultiPart)
+                predict(file.toImageMultiPart())
             }
         }
-
-    fun File.toImageMultiPart() {
-        val requestImageFile = this.asRequestBody("image/*".toMediaTypeOrNull())
-        val iamgeMultiPart = MultipartBody.Part.createFormData("image", this.name, requestImageFile)
-    }
 
     private fun predict(image: MultipartBody.Part) {
         viewModel.predict(image).observe(viewLifecycleOwner) {
@@ -131,7 +126,8 @@ class ScanFragment : Fragment() {
         if (isGranted) {
             startCamera()
         } else {
-            Toast.makeText(requireContext(), "Camera permission not granted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Camera permission not granted", Toast.LENGTH_SHORT)
+                .show()
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
