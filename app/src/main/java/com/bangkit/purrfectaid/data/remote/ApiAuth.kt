@@ -6,7 +6,6 @@ import com.bangkit.purrfectaid.domain.model.LoginRequest
 import com.bangkit.purrfectaid.domain.model.RegisterRequest
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 /**

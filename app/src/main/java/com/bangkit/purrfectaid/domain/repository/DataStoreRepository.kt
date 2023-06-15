@@ -1,6 +1,5 @@
 package com.bangkit.purrfectaid.domain.repository
 
-import androidx.lifecycle.LiveData
 import com.bangkit.purrfectaid.domain.model.User
 
 /**

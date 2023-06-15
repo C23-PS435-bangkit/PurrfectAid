@@ -3,9 +3,7 @@ package com.bangkit.purrfectaid.data.repository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.lifecycle.LiveData
 import com.bangkit.purrfectaid.domain.model.User
 import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
 import kotlinx.coroutines.flow.first

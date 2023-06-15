@@ -1,10 +1,8 @@
 package com.bangkit.purrfectaid.presentation.scan
 
 import android.Manifest
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,20 +15,15 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentScanBinding
 import com.bangkit.purrfectaid.utils.Result
 import com.bangkit.purrfectaid.utils.createFile
 import com.bangkit.purrfectaid.utils.toImageMultiPart
 import com.bangkit.purrfectaid.utils.uriToFile
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import java.io.File
 
 @AndroidEntryPoint
 class ScanFragment : Fragment() {

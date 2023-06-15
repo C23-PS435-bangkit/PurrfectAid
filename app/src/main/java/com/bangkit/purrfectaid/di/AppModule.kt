@@ -1,12 +1,7 @@
 package com.bangkit.purrfectaid.di
 
-import com.bangkit.purrfectaid.BuildConfig
-import com.bangkit.purrfectaid.data.remote.ApiAuth
 import com.bangkit.purrfectaid.data.remote.ApiPredict
-import com.bangkit.purrfectaid.data.repository.AuthRepositoryImpl
 import com.bangkit.purrfectaid.data.repository.PredictRepositoryImpl
-import com.bangkit.purrfectaid.domain.repository.AuthRepository
-import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
 import com.bangkit.purrfectaid.domain.repository.PredictRepository
 import com.bangkit.purrfectaid.utils.Constants.PREDICT_URL
 import dagger.Module
@@ -18,7 +13,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 /**
  * Created by Yosua on 12/06/2023

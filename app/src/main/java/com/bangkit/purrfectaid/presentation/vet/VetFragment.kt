@@ -3,6 +3,7 @@ package com.bangkit.purrfectaid.presentation.vet
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,10 +13,11 @@ import android.view.Window
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.BottomSheetLayoutBinding
 import com.bangkit.purrfectaid.databinding.FragmentVetBinding
-import com.google.android.gms.common.api.Status
+import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,19 +26,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.model.RectangularBounds
-import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.PlacesClient
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class VetFragment : Fragment(), OnMapReadyCallback {
@@ -48,6 +45,13 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var placeClient: PlacesClient
     private lateinit var bottomSheetDialog: BottomSheetDialog
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+
+    //    For the dummy recycle view now
+    private lateinit var adapter: VetAdapter
+    private lateinit var recycleView: RecyclerView
+    private var nameList = ArrayList<String>()
+    private var avatarList = ArrayList<Drawable>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,11 +64,14 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         Places.initialize(requireContext(), getString(R.string.maps_api_key))
         placeClient = Places.createClient(requireContext())
 
+        for(i in 1..10){
+            nameList.add("Scabies")
+            avatarList.add(ContextCompat.getDrawable(requireContext(),R.drawable.cat_diagnose_1)!!)
+        }
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         showBottomDialog()
-
-
 
         return binding.root
     }
@@ -75,25 +82,19 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         bottomSheetBinding = BottomSheetLayoutBinding.bind(bottomSheetView)
 
         bottomSheetDialog = BottomSheetDialog(requireContext())
+
         bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetBinding.searchVet.apply {
-            val autocompleteFragment =
-//            bottomSheetBinding.searchVet as AutocompleteSupportFragment
-                childFragmentManager.findFragmentById(R.id.search_vet)
-                        as AutocompleteSupportFragment
-            autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
-            autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-                override fun onPlaceSelected(place: Place) {
-                    // TODO: Get info about the selected place.
-                    Log.i(TAG, "Place: ${place.name}, ${place.id}")
-                }
-                override fun onError(status: Status) {
-                    // TODO: Handle the error.
-                    Log.i(TAG, "An error occurred: $status")
-                }
-            })
-        }
+        val bottomSheetLayout = bottomSheetView.parent as View
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        bottomSheetBehavior.peekHeight = 600
+        bottomSheetLayout.minimumHeight = 200
+
+        // for dummy recycle view, changes over time
+        recycleView = bottomSheetBinding.rvNearestVet
+        adapter = VetAdapter(nameList,avatarList)
+        recycleView.adapter= adapter
+
         bottomSheetDialog.show()
     }
 
@@ -144,8 +145,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun fetchNearbyVetLocations(latLng:LatLng) {
-        val token = AutocompleteSessionToken.newInstance()
-
+        AutocompleteSessionToken.newInstance()
         val request = FindAutocompletePredictionsRequest.builder()
             .setTypesFilter(listOf(PlaceTypes.ADDRESS))
             .setLocationBias(RectangularBounds.newInstance(

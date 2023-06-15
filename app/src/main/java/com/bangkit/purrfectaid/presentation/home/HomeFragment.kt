@@ -1,12 +1,10 @@
 package com.bangkit.purrfectaid.presentation.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bangkit.purrfectaid.MainActivity
+import androidx.fragment.app.Fragment
 import com.bangkit.purrfectaid.R
 
 class HomeFragment : Fragment() {
