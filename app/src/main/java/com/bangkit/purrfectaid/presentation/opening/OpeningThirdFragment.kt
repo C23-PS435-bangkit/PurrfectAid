@@ -19,7 +19,7 @@ class OpeningThirdFragment : Fragment() {
     ): View {
         _binding = FragmentOpeningThirdBinding.inflate(inflater, container, false)
 
-        binding.thirdOpeningButton.setOnClickListener {
+        binding.btnReveals.setOnClickListener {
             val toRegister = OpeningThirdFragmentDirections.actionOpeningThirdFragmentToRegisterFragment()
             findNavController().navigate(toRegister)
         }

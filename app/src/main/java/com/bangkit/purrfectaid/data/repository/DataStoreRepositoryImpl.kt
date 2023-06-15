@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.LiveData
 import com.bangkit.purrfectaid.domain.model.User
 import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
@@ -16,12 +17,40 @@ import kotlinx.coroutines.flow.map
  */
 class DataStoreRepositoryImpl(private val dataStore: DataStore<Preferences>) : DataStoreRepository {
 
+    private val id = intPreferencesKey("id")
     private val name = stringPreferencesKey("name")
     private val email = stringPreferencesKey("email")
+    private val image = stringPreferencesKey("image")
+    private val userAuthProvider = intPreferencesKey("user_auth_provider")
+    private val userIsNativeRegistration = intPreferencesKey("userIsNativeRegistration")
+
     private val token = stringPreferencesKey("token")
 
     override suspend fun setUser(user: User) {
+        dataStore.edit { pref ->
+            pref[this.id] = user.user_id
+            pref[this.name] = user.user_name
+            pref[this.email] = user.user_email
+            pref[this.image] = user.user_image ?: ""
+            pref[this.userAuthProvider] = user.user_auth_provider
+            pref[this.userIsNativeRegistration] = user.user_is_native_registration
+        }
+    }
 
+    override suspend fun getUser(): Flow<User> {
+        return dataStore.data.map { pref ->
+            val id = pref[this.id]
+            val name = pref[this.name]
+            val email = pref[this.email]
+            val image = pref[this.image]
+
+            User(
+                user_id = id!!,
+                user_email = email!!,
+                user_image = image,
+                user_name = name!!
+            )
+        }
     }
 
     override suspend fun setToken(token: String) {

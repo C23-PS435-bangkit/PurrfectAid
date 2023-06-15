@@ -22,13 +22,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.48" />
 
     <TextView
         android:id="@+id/first_opening_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lorem_ipsum"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Welcome to Purrfect Aid"
         android:textColor="@color/blue"
         android:textSize="50sp"
         android:textStyle="bold"
@@ -40,10 +41,11 @@
         android:id="@+id/first_opening_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit"
-        android:textAlignment="center"
+        android:text="@string/first_opening_subtitle"
         android:textColor="@color/blue"
-        android:textSize="20sp"
+        android:paddingHorizontal="5dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@id/first_opening_title"
         app:layout_constraintStart_toStartOf="@id/first_opening_title"
         app:layout_constraintTop_toBottomOf="@id/first_opening_title" />

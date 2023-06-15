@@ -7,8 +7,7 @@ data class User(
     val user_id: Int,
     val user_email: String,
     val user_name: String,
-    val user_password: String,
     val user_image: String? = null,
     val user_auth_provider: Int = 4,
-    val user_is_native_registration: Boolean = false
+    val user_is_native_registration: Int = 1,
 )

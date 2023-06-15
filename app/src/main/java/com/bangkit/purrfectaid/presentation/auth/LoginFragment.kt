@@ -191,13 +191,13 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-//            val loginRequest = LoginRequest(
-//                email = binding.edLoginEmail.text.toString(),
-//                password = binding.edLoginPassword.text.toString()
-//            )
-//            login(loginRequest)
-            val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-            findNavController().navigate(toHome)
+            val loginRequest = LoginRequest(
+                email = binding.edLoginEmail.text.toString(),
+                password = binding.edLoginPassword.text.toString()
+            )
+            login(loginRequest)
+//            val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+//            findNavController().navigate(toHome)
         }
 
         binding.btnLoginWithGoogle.setOnClickListener {

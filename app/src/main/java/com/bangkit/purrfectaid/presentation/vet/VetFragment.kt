@@ -1,6 +1,5 @@
 package com.bangkit.purrfectaid.presentation.vet
 
-import android.app.Dialog
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,9 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -58,6 +54,20 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         showBottomDialog()
         return binding.root
     }
+
+    override fun onMapReady(gMap: GoogleMap) {
+        googleMap = gMap
+        googleMap.uiSettings.isCompassEnabled = true
+        googleMap.uiSettings.isZoomControlsEnabled =true
+        googleMap.uiSettings.isMapToolbarEnabled = true
+
+        getMyLocation()
+        // Example: Hide the bottom sheet when the map is clicked
+//        googleMap.setOnMapClickListener {
+//            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+//        }
+    }
+
     private fun showBottomDialog() {
         val dialog = BottomSheetDialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -119,17 +129,6 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    override fun onMapReady(gMap: GoogleMap) {
-        googleMap = gMap
-        googleMap.uiSettings.isCompassEnabled = true
-        googleMap.uiSettings.isZoomControlsEnabled =true
-        googleMap.uiSettings.isMapToolbarEnabled = true
 
-        getMyLocation()
-        // Example: Hide the bottom sheet when the map is clicked
-//        googleMap.setOnMapClickListener {
-//            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-//        }
-    }
 
 }

@@ -25,6 +25,7 @@ class AuthRepositoryImpl (private val apiAuth: ApiAuth, private val dataStore: D
                 if (it.isSuccessful) {
                     val body = it.body()!!
                     dataStore.setToken(body.token)
+                    dataStore.setUser(body.data)
                     emit(Result.Success(body))
                 } else {
                     val errorMessage = it.getError<ErrorResponse>().msg
