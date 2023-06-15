@@ -22,33 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <TextView
         android:id="@+id/first_opening_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Welcome to Purrfect Aid"
+        android:text="Welcome to Purrfect Aid!"
         android:textColor="@color/blue"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/first_opening_guideline" />
-
-    <TextView
-        android:id="@+id/first_opening_subtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/first_opening_subtitle"
-        android:textColor="@color/blue"
-        android:paddingHorizontal="5dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@id/first_opening_title"
-        app:layout_constraintStart_toStartOf="@id/first_opening_title"
-        app:layout_constraintTop_toBottomOf="@id/first_opening_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/first_opening_button"

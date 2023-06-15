@@ -51,6 +51,8 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+//        binding.loadingBar.
+
 //        googleSignInClient
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -222,6 +224,7 @@ class LoginFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     if (it.data.status == 200) {
+                        hideLoading()
                         Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
                         val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(toHome)
@@ -229,18 +232,25 @@ class LoginFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-
+                    showLoading()
                 }
 
                 is Result.Error -> {
+                    hideLoading()
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                     Log.e("Error Login", "Error: ${it.errorMessage}")
                 }
             }
         }
     }
 
-    companion object {
-        const val RC_SIGN_IN = 999
+    private fun showLoading() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.loadingBar.setOnClickListener {  }
+    }
+
+    private fun hideLoading() {
+        binding.loadingBar.visibility = View.GONE
     }
 
     override fun onDestroyView() {

@@ -111,6 +111,7 @@ class RegisterFragment : Fragment() {
             when (it) {
                 is Result.Success -> {
                     if (it.data.status == 200) {
+                        hideLoading()
                         Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
                         val toLogin =
                             RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
@@ -119,14 +120,25 @@ class RegisterFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-
+                    showLoading()
                 }
 
                 is Result.Error -> {
+                    hideLoading()
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                     Log.e("Error Register", "Error: ${it.errorMessage}")
                 }
             }
         }
+    }
+
+    private fun showLoading() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.loadingBar.setOnClickListener {  }
+    }
+
+    private fun hideLoading() {
+        binding.loadingBar.visibility = View.GONE
     }
 
     override fun onDestroyView() {

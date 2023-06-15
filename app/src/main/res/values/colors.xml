@@ -7,4 +7,6 @@
     <color name="surface">#F3F5FF</color>
 
     <color name="textColor">#7974C1</color>
+
+    <color name="gray">#80B3B3B3</color>
 </resources>

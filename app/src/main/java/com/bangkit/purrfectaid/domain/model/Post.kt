@@ -13,5 +13,11 @@ data class Post(
     @SerializedName("community_post_content")
     val postContent: String,
     @SerializedName("community_post_user_id")
-    val postUserId: Int
+    val postUserId: Int,
+    @SerializedName("user_name")
+    val username: String,
+    @SerializedName("comment_count")
+    val commentCount: Int,
+    @SerializedName("like_count")
+    val likeCount: Int
 )

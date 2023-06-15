@@ -11,4 +11,6 @@ class CommunityViewModel @Inject constructor(private val repo: CommunityReposito
 
     fun insertPost(request: InsertPostRequest) = repo.insertPost(request)
 
+    fun getAllPost() = repo.getAllPost()
+
 }

@@ -64,7 +64,7 @@ object AppModule {
         var token: String
         runBlocking {
             withContext(Dispatchers.Default) {
-                token = dataStore.getToken()
+                token = dataStore.getToken()!!
             }
         }
 
