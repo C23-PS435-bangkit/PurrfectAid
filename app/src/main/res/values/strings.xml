@@ -42,11 +42,12 @@
     <string name="instruction_position_scan">Please position the target skin in the highlighted box</string>
 
     <string name="scanFragment">scanFragment</string>
-
+    <string name="maps_api_key">AIzaSyDxsyy92AvMeK538tjyJzTmCh5-QlHlPzs</string>
     <string name="nearest_vet">Nearest Vet</string>
     <string name="find_nearest_vet">Find\nNearest Vet</string>
     <string name="save_diagnose">Save       Diagnose</string>
     <string name="first_opening_subtitle">Purrfect Aid is your go-to app for first aid and disease identification tools for stray animals. Join our community of animal welfare supporters and make a difference in the lives of these animals in need.</string>
     <string name="second_opening_subtitle">Quickly identify symptoms and provide necessary care for stray animals with Purrfect Aid.</string>
     <string name="third_opening_subtitle">Join our community of animal welfare supporters on Purrfect Aid and share your knowledge and resources to help care for stray animals. Together, we can make a difference in the lives of these animals.</string>
+
 </resources>
