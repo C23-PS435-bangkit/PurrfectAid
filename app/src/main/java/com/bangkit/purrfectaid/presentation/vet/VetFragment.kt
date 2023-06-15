@@ -3,6 +3,7 @@ package com.bangkit.purrfectaid.presentation.vet
 import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -87,8 +88,9 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         bottomSheetDialog.setContentView(bottomSheetView)
         val bottomSheetLayout = bottomSheetView.parent as View
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        bottomSheetBehavior.peekHeight = 600
-        bottomSheetLayout.minimumHeight = 200
+
+        // Set the maximum height of the bottom sheet
+        bottomSheetBehavior.peekHeight = 300
 
         // for dummy recycle view, changes over time
         recycleView = bottomSheetBinding.rvNearestVet
