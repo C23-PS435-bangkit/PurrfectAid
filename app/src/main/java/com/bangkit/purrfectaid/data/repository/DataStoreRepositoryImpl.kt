@@ -58,9 +58,9 @@ class DataStoreRepositoryImpl(private val dataStore: DataStore<Preferences>) : D
         }
     }
 
-    override suspend fun getToken(): String? {
+    override suspend fun getToken(): String {
         return dataStore.data.map { pref ->
-            pref[token]
+            pref[token].orEmpty()
         }.first()
     }
 

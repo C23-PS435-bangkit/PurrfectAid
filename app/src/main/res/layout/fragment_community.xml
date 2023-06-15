@@ -29,7 +29,7 @@
                 android:hint="What's going on?"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
-                android:minLines="5"
+                android:minLines="2"
                 android:padding="10dp"
                 android:scrollbars="vertical"
                 android:textColor="@color/textColor"

@@ -10,6 +10,6 @@ interface DataStoreRepository {
     suspend fun setUser(user: User)
     suspend fun getUser() : Flow<User>
     suspend fun setToken(token: String)
-    suspend fun getToken() : String?
+    suspend fun getToken() : String
     suspend fun logout() : Boolean
 }
