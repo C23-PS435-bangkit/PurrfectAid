@@ -19,7 +19,11 @@
         android:id="@+id/scanFragment"
         android:name="com.bangkit.purrfectaid.presentation.scan.ScanFragment"
         android:label="fragment_scan"
-        tools:layout="@layout/fragment_scan" />
+        tools:layout="@layout/fragment_scan">
+        <action
+            android:id="@+id/action_scanFragment_to_diagnoseFragment"
+            app:destination="@id/diagnoseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bangkit.purrfectaid.presentation.profile.ProfileFragment"
@@ -100,8 +104,8 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
-            app:enterAnim="@anim/anim_exit_to_right"
-            app:exitAnim="@anim/anim_back_from_left"
+            app:enterAnim="@anim/anim_back_from_left"
+            app:exitAnim="@anim/anim_exit_to_right"
             app:popEnterAnim="@anim/anim_back_from_right"
             app:popExitAnim="@anim/anim_exit_to_left" />
         <action
@@ -113,4 +117,13 @@
         android:name="com.bangkit.purrfectaid.presentation.auth.AuthGoogleFragment"
         android:label="fragment_auth_google"
         tools:layout="@layout/fragment_auth_google" />
+    <fragment
+        android:id="@+id/diagnoseFragment"
+        android:name="com.bangkit.purrfectaid.presentation.diagnose.DiagnoseFragment"
+        android:label="fragment_diagnose"
+        tools:layout="@layout/fragment_diagnose">
+        <argument
+            android:name="result"
+            app:argType="com.bangkit.purrfectaid.domain.model.Predict" />
+    </fragment>
 </navigation>

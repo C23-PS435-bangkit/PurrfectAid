@@ -37,7 +37,7 @@
             android:id="@+id/ed_login_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_email"
+            android:drawableStart="@drawable/icon_style_email"
             android:drawablePadding="10dp"
             android:drawableTintMode="multiply"
             android:hint="@string/email" />
@@ -57,7 +57,7 @@
             android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:drawableStart="@drawable/ic_password"
+            android:drawableStart="@drawable/icon_style_password"
             android:drawablePadding="10dp"
             android:drawableTintMode="multiply"
             android:hint="@string/password"

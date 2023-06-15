@@ -1,13 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:context=".presentation.community.CommunityFragment">
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ed_post_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@null"
+                android:background="@android:color/transparent"
+                android:gravity="top"
+                android:hint="What's going on?"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:minLines="5"
+                android:padding="10dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btn_community_gallery"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_gallery"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_community_post"
+                app:layout_constraintStart_toStartOf="@id/ed_post_content"
+                app:layout_constraintTop_toBottomOf="@id/ed_post_content"
+                app:tint="@color/blue" />
+
+            <ImageView
+                android:id="@+id/btn_to_scan"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/menu_scan"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_community_post"
+                app:layout_constraintStart_toEndOf="@id/btn_community_gallery"
+                app:layout_constraintTop_toBottomOf="@id/ed_post_content" />
+
+            <Button
+                android:id="@+id/btn_community_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="@id/ed_post_content"
+                app:layout_constraintTop_toBottomOf="@id/ed_post_content" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

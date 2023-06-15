@@ -1,17 +1,15 @@
 package com.bangkit.purrfectaid.domain.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 /**
  * Created by Yosua on 13/06/2023
  */
+
+@Parcelize
 data class Predict(
-    @SerializedName("model_allergic")
-    val modelAllergic: Float,
-    @SerializedName("model_bacterial")
-    val modelBacterial: Float,
-    @SerializedName("model_fungal")
-    val modelFungal: Float,
-    @SerializedName("model_healthy")
-    val modelHealthy: Float
-)
+    val diagnose: String,
+    val treatment: String
+) : Parcelable
