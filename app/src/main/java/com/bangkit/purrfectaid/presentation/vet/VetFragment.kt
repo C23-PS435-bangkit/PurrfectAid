@@ -27,10 +27,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.PlaceTypes
 import com.google.android.libraries.places.api.model.RectangularBounds
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.PlacesClient
@@ -139,7 +142,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.e("VetFragment", "Failed to get the user's location: ${exception.message}")
+                    Log.e(TAG, "Failed to get the user's location: ${exception.message}")
                 }
         } else {
             requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -147,50 +150,66 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun fetchNearbyVetLocations(latLng:LatLng) {
-        AutocompleteSessionToken.newInstance()
+
+        val bounds = RectangularBounds.newInstance(
+            LatLng(latLng.latitude-0.1, latLng.longitude-0.1), // Southwest coordinate of Medan
+            LatLng(latLng.latitude+0.1, latLng.longitude+0.1) // Northeast coordinate of Medan
+        )
+//        val bounds = RectangularBounds.newInstance(
+//            LatLng(3.508582, 98.622499), // Southwest coordinate of Medan
+//            LatLng(3.644217, 98.737114) // Northeast coordinate of Medan
+//        )
+
+        val token = AutocompleteSessionToken.newInstance()
         val request = FindAutocompletePredictionsRequest.builder()
-            .setTypesFilter(listOf(PlaceTypes.ADDRESS))
-            .setLocationBias(RectangularBounds.newInstance(
-                LatLngBounds.builder().include(latLng).build()
-            ))
+            .setLocationBias(bounds)
             .setOrigin(latLng)
-            .setQuery("veterinary_care")
+            .setTypesFilter(listOf(PlaceTypes.VETERINARY_CARE))
+            .setSessionToken(token)
+            .setQuery("veterinary")
             .build()
 
         placeClient.findAutocompletePredictions(request)
             .addOnSuccessListener { response:FindAutocompletePredictionsResponse ->
+                Log.e(TAG, response.autocompletePredictions.toString())
                 for (prediction in response.autocompletePredictions) {
-                    Log.i(TAG, prediction.placeId)
-                    Log.i(TAG, prediction.getPrimaryText(null).toString())
+                    Log.e(TAG, prediction.placeId)
+                    Log.e(TAG, prediction.getPrimaryText(null).toString())
                     val placeId = prediction.placeId
 
-//                    val placeFields = listOf(Place.Field.LAT_LNG)
-//                    val fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
-//
-//                    placeClient.fetchPlace(fetchPlaceRequest)
-//                        .addOnSuccessListener {
-//                                fetchPlaceResponse->
-//                            val place = fetchPlaceResponse.place
-//                            val placeLatLng = place.latLng
-//
-//                            val placeName = prediction.getPrimaryText(null).toString()
-//                            val placeAddress = prediction.getSecondaryText(null).toString()
-//
-//                            val markerOptions = placeLatLng?.let {
-//                                MarkerOptions()
-//                                    .position(it)
-//                                    .title(placeName)
-//                                    .snippet(placeAddress)
-//                            }
-//
-//                            if (markerOptions != null) {
-//                                googleMap.addMarker(markerOptions)
-//                            }
-//                        }
+                    val placeFields = listOf(Place.Field.LAT_LNG)
+                    val fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
+
+                    placeClient.fetchPlace(fetchPlaceRequest)
+                        .addOnSuccessListener {
+                                fetchPlaceResponse->
+                            val place = fetchPlaceResponse.place
+                            val placeLatLng = place.latLng
+
+                            if (placeLatLng != null) {
+                                val placeLatitude = placeLatLng.latitude
+                                val placeLongitude = placeLatLng.longitude
+                                Log.e(TAG, "Place Latitude: $placeLatitude, Longitude: $placeLongitude")
+                                val placeName = prediction.getPrimaryText(null).toString()
+                                val placeAddress = prediction.getSecondaryText(null).toString()
+
+                                val markerOptions = placeLatLng.let {
+                                    MarkerOptions()
+                                        .position(it)
+                                        .title(placeName)
+                                        .snippet(placeAddress)
+                                }
+                                googleMap.addMarker(markerOptions)
+                            }
+
+                        }
                 }
             }
             .addOnFailureListener { exception ->
-                Log.e("VetFragment", "Failed to fetch nearby veterinarian locations: ${exception.message}")
+                Log.e(TAG, "Failed to fetch nearby veterinary locations: ${exception.message}")
             }
+    }
+    companion object{
+        private const val TAG =".VetFragment"
     }
 }

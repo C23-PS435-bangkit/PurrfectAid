@@ -27,7 +27,7 @@
         <!-- Still using the hardcode api-key-->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDxsyy92AvMeK538tjyJzTmCh5-QlHlPzs" />
+            android:value="AIzaSyAlXcP6HBdRO5z9uOBl5e5zUsz_VgLeFhM" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

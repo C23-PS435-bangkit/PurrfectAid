@@ -136,7 +136,6 @@
                     android:textAlignment="center"
                     android:textColor="@color/blue" />
 
-
             </LinearLayout>
 
         </LinearLayout>
