@@ -12,14 +12,12 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentRegisterBinding
 import com.bangkit.purrfectaid.domain.model.RegisterRequest
 import com.bangkit.purrfectaid.utils.Constants.BASE_URL
 import com.bangkit.purrfectaid.utils.Result
 import com.bangkit.purrfectaid.utils.getInputLayout
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
