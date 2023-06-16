@@ -6,7 +6,7 @@ package com.bangkit.purrfectaid.utils
 object Constants {
 
     const val BASE_URL = "http://10.0.2.2:3000/"
-    const val PREDICT_URL = "http://10.0.2.2:5000/"
-    const val DATA_STORE = "data_store"
+    const val DATA_USER = "data_user"
+    const val DATA_TOKEN = "data_token"
 
 }

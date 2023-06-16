@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.bangkit.purrfectaid.MainViewModel
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentHomeBinding
@@ -16,6 +17,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by viewModels()
     private val sharedViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -23,9 +25,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         sharedViewModel.getUser()
 
-        binding.tvGreeting.text = resources.getString(R.string.hello_with_name, sharedViewModel.user.value?.user_name.toString())
+        sharedViewModel.user.observe(viewLifecycleOwner) {
+            binding.tvGreeting.text = resources.getString(R.string.hello_with_name, it.user_name)
+        }
+
         return binding.root
     }
 

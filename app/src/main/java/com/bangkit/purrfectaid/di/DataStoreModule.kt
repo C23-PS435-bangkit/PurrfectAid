@@ -10,7 +10,8 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.bangkit.purrfectaid.data.repository.DataStoreRepositoryImpl
 import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
-import com.bangkit.purrfectaid.utils.Constants.DATA_STORE
+import com.bangkit.purrfectaid.utils.Constants.DATA_TOKEN
+import com.bangkit.purrfectaid.utils.Constants.DATA_USER
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +20,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -30,20 +32,38 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext context: Context) : DataStore<Preferences> {
+    @Named("DataUser")
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             corruptionHandler = ReplaceFileCorruptionHandler(
                 produceNewData = { emptyPreferences() }
             ),
-            produceFile = { context.preferencesDataStoreFile(DATA_STORE)},
-            migrations = listOf(SharedPreferencesMigration(context, DATA_STORE))
+            produceFile = { context.preferencesDataStoreFile(DATA_USER) },
+            migrations = listOf(SharedPreferencesMigration(context, DATA_USER))
         )
     }
 
     @Provides
     @Singleton
-    fun provideDataStoreRepository(dataStore: DataStore<Preferences>) : DataStoreRepository {
-        return DataStoreRepositoryImpl(dataStore)
+    @Named("DataToken")
+    fun provideDataToken(@ApplicationContext context: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            corruptionHandler = ReplaceFileCorruptionHandler(
+                produceNewData = { emptyPreferences() }
+            ),
+            produceFile = { context.preferencesDataStoreFile(DATA_TOKEN) },
+            migrations = listOf(SharedPreferencesMigration(context, DATA_TOKEN))
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreRepository(
+        @Named("DataUser") dataStore: DataStore<Preferences>,
+        @Named("DataToken") dataToken: DataStore<Preferences>
+    ): DataStoreRepository {
+        return DataStoreRepositoryImpl(dataStore, dataToken)
     }
 }
