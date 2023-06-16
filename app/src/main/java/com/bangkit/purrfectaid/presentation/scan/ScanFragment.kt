@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -19,16 +18,12 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.bangkit.purrfectaid.R
-import com.bangkit.purrfectaid.databinding.DiagnoseSheetLayoutBinding
 import com.bangkit.purrfectaid.databinding.FragmentScanBinding
 import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseBottomSheet
 import com.bangkit.purrfectaid.utils.Result
 import com.bangkit.purrfectaid.utils.createFile
 import com.bangkit.purrfectaid.utils.toImageMultiPart
 import com.bangkit.purrfectaid.utils.uriToFile
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
 

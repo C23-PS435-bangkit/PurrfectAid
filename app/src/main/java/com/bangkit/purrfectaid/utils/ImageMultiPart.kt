@@ -10,5 +10,5 @@ import java.io.File
  */
 fun File.toImageMultiPart(): MultipartBody.Part {
     val requestImageFile = this.asRequestBody("image/*".toMediaTypeOrNull())
-    return MultipartBody.Part.createFormData("images", this.name, requestImageFile)
+    return MultipartBody.Part.createFormData("image", this.name, requestImageFile)
 }

@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bangkit.purrfectaid.databinding.DiagnoseSheetLayoutBinding
-import com.bangkit.purrfectaid.databinding.FragmentScanBinding
-import com.bangkit.purrfectaid.domain.model.Predict
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
@@ -26,7 +24,6 @@ class DiagnoseBottomSheet : BottomSheetDialogFragment() {
         val diagnose = requireArguments().getString("diagnose")
         val treatment = requireArguments().getString("treatment")
 
-//        if (diagnose == "Healthy")
         binding.tvDiagnoseTitle.text = diagnose
         binding.tvDiagnoseTreatment.text = treatment
 

@@ -51,14 +51,10 @@ class LoginFragment : Fragment() {
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-//        binding.loadingBar.
-
-//        googleSignInClient
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
 
-//        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         oneTapClient = Identity.getSignInClient(requireContext())
         signInRequest = BeginSignInRequest.builder()
@@ -74,24 +70,6 @@ class LoginFragment : Fragment() {
         setupView()
 
         return binding.root
-    }
-
-//    private fun siggn() {
-//        val intent = googleSignInClient.signInIntent
-//        startActivityForResult(intent, 400)
-//    }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == 400) {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            task.result.
-//        }
-//    }
-
-    private fun setupGoogle() {
-
     }
 
     private fun signInGoogle() {
@@ -173,12 +151,6 @@ class LoginFragment : Fragment() {
 
     }
 
-//    private fun Any.toRequestBody(mediaType: MediaType = "application/json; charset=utf-8".toMediaType()): RequestBody {
-//        val json = Gson().toJson(this)
-//        return json.toRequestBody(mediaType)
-//    }
-
-
     private fun setupView() {
         binding.btnToRegister.setOnClickListener {
             val toRegister = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
@@ -197,25 +169,6 @@ class LoginFragment : Fragment() {
 
         binding.btnLoginWithGoogle.setOnClickListener {
             signInGoogle()
-//            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
-//                when (it) {
-//                    is Result.Success -> {
-//                        if (it.data.status == 200) {
-//                            Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
-//                            val tohome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-//                            findNavController().navigate(tohome)
-//                        }
-//                    }
-//
-//                    is Result.Loading -> {
-//
-//                    }
-//
-//                    is Result.Error -> {
-//                        Log.e("Error Login Google", "Error: ${it.errorMessage}")
-//                    }
-//                }
-//            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bangkit.purrfectaid.domain.repository
 
 import androidx.lifecycle.LiveData
+import com.bangkit.purrfectaid.domain.model.Diagnose
 import com.bangkit.purrfectaid.domain.model.Predict
 import com.bangkit.purrfectaid.utils.Result
 import okhttp3.MultipartBody
@@ -11,4 +12,6 @@ import okhttp3.MultipartBody
 interface PredictRepository {
 
     fun predict(image: MultipartBody.Part) : LiveData<Result<Predict>>
+
+    fun getDiagnose() : LiveData<Result<List<Diagnose>>>
 }

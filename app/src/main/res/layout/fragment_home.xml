@@ -126,8 +126,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
                     android:ellipsize="end"
-                    android:maxLines="6"
                     android:fontFamily="@font/montserrat_regular"
+                    android:maxLines="6"
                     android:text="@string/lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit"
                     android:textColor="@color/textColor"
                     android:textSize="12sp" />
@@ -171,35 +171,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_diagnose_history" />
 
-    <include
-        android:id="@+id/placeholder_diagnose_first"
-        layout="@layout/item_card_diagnose"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_diagnose_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_diagnose_history"
+        tools:listitem="@layout/item_card_diagnose" />
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="NO DIAGNOSTIC HISTORY"
+        android:textColor="@color/blue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_diagnose_history" />
-
-    <include
-        android:id="@+id/placeholder_diagnose_second"
-        layout="@layout/item_card_diagnose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/placeholder_diagnose_first" />
-
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/rv_diagnose_history"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        tools:listitem="@layout/item_card_diagnose"-->
-    <!--        android:layout_marginTop="15dp"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/tv_diagnose_history"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        tools:itemCount="5"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,7 @@
 package com.bangkit.purrfectaid.presentation.vet
 
 import android.Manifest
-import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.BottomSheetLayoutBinding
 import com.bangkit.purrfectaid.databinding.FragmentVetBinding
-import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -26,7 +23,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken
