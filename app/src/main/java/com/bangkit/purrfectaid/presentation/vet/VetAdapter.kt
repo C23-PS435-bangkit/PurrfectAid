@@ -1,6 +1,5 @@
 package com.bangkit.purrfectaid.presentation.vet
 
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,8 @@ import com.bangkit.purrfectaid.databinding.ItemCardDiagnoseBinding
 import com.bumptech.glide.Glide
 
 // Here the logic begin
-class VetAdapter (private var placeList: ArrayList<String>, private val avatar:List<Drawable>):RecyclerView.Adapter<VetAdapter.ViewHolder>() {
+class VetAdapter (private var placeList: ArrayList<String>, private val avatar:List<String>):RecyclerView.Adapter<VetAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCardDiagnoseBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -26,8 +26,9 @@ class VetAdapter (private var placeList: ArrayList<String>, private val avatar:L
     }
 
     class ViewHolder(private val binding:ItemCardDiagnoseBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(placeList:String, avatar:Drawable){
+        fun bind(placeList:String, avatar:String){
             binding.tvDiagnoseName.text = placeList
+
             Glide.with(itemView.context)
                 .load(avatar)
                 .into(binding.ivDiagnose)

@@ -10,4 +10,7 @@ import javax.inject.Inject
 class VetViewModel  @Inject constructor(private val repo: MapRepository) : ViewModel() {
 
    fun getLocation(request: MapRequest) = repo.getLocation(request)
+
+   fun getImage(photo_reference: String, api_key: String) = repo.getImage(photo_reference, api_key)
+
 }

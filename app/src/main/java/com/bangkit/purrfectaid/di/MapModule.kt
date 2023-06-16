@@ -1,6 +1,5 @@
 package com.bangkit.purrfectaid.di
 
-import android.content.Context
 import com.bangkit.purrfectaid.data.remote.ApiMaps
 import com.bangkit.purrfectaid.data.repository.MapRepositoryImpl
 import com.bangkit.purrfectaid.domain.repository.MapRepository
@@ -28,7 +27,7 @@ object MapModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(loggingInterceptor)
+                    .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE))
                     .readTimeout(60, TimeUnit.SECONDS)
                     .build())
             .build()
