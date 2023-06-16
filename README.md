@@ -29,7 +29,7 @@
   <p align="center">
     Scan, Heal, Purrfect Aid reveals, for every animal's skin it appeals!
     <br />
-    <a href="https://github.com/C23-PS435-bangkit/PurrfectAid" target="_blank">APK Demo</a>
+    <a href="https://github.com/C23-PS435-bangkit/PurrfectAid/releases" target="_blank">APK Demo</a>
   </p>
 
 
