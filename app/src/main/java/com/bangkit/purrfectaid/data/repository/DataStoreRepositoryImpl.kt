@@ -9,7 +9,6 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.bangkit.purrfectaid.domain.model.User
 import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 

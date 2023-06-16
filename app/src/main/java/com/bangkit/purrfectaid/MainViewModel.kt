@@ -10,11 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * Created by Yosua on 13/06/2023
- */
 @HiltViewModel
-class MainViewModel @Inject constructor(private val dataStore: DataStoreRepository): ViewModel() {
+class MainViewModel @Inject constructor(private val dataStore: DataStoreRepository) : ViewModel() {
 
     private val _user = MutableLiveData<User>()
     val user: LiveData<User> = _user
@@ -28,4 +25,5 @@ class MainViewModel @Inject constructor(private val dataStore: DataStoreReposito
     }
 
     suspend fun getToken() = dataStore.getToken()
+
 }

@@ -1,9 +1,10 @@
 package com.bangkit.purrfectaid.data.remote
 
+import com.bangkit.purrfectaid.data.remote.response.DiagnoseHistoryResponse
 import com.bangkit.purrfectaid.data.remote.response.PredictResponse
-import com.bangkit.purrfectaid.domain.model.Predict
 import okhttp3.MultipartBody
 import retrofit2.Response
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -18,4 +19,7 @@ interface ApiPredict {
     suspend fun predict(
         @Part images: MultipartBody.Part
     ) : Response<PredictResponse>
+
+    @GET("predict")
+    suspend fun getDiagnose() : Response<DiagnoseHistoryResponse>
 }

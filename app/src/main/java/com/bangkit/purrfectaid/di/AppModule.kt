@@ -31,13 +31,14 @@ import javax.inject.Singleton
 object AppModule {
 
     @Provides
-    fun provideApiPredictInstance(loggingInterceptor: HttpLoggingInterceptor) : ApiPredict =
+    fun provideApiPredictInstance(loggingInterceptor: HttpLoggingInterceptor, tokenInterceptor: Interceptor) : ApiPredict =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
+                    .addInterceptor(tokenInterceptor)
                     .readTimeout(60, TimeUnit.SECONDS)
                     .build()
             ).build()

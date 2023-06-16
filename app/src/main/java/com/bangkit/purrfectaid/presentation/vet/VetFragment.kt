@@ -1,9 +1,7 @@
 package com.bangkit.purrfectaid.presentation.vet
 
 import android.Manifest
-import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -20,9 +18,6 @@ import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.BottomSheetLayoutBinding
 import com.bangkit.purrfectaid.databinding.FragmentVetBinding
 import com.bangkit.purrfectaid.domain.model.MapRequest
-import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseBottomSheet
-import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseFragment
-import com.bangkit.purrfectaid.presentation.scan.ScanViewModel
 import com.bangkit.purrfectaid.utils.Result
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -31,16 +26,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.AutocompleteSessionToken
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.PlaceTypes
-import com.google.android.libraries.places.api.model.RectangularBounds
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
-import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
