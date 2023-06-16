@@ -27,7 +27,7 @@ object MapModule {
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                    .addInterceptor(loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE))
+                    .addInterceptor(loggingInterceptor)
                     .readTimeout(60, TimeUnit.SECONDS)
                     .build())
             .build()

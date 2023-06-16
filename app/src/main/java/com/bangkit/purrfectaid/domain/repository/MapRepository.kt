@@ -9,5 +9,4 @@ import okhttp3.ResponseBody
 interface MapRepository {
 
     fun getLocation(request: MapRequest): LiveData<Result<MapResponse>>
-    fun getImage(photo_reference: String, api_key: String): LiveData<Result<ResponseBody>>
 }

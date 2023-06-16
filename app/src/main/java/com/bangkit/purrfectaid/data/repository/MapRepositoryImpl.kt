@@ -29,23 +29,4 @@ class MapRepositoryImpl(private val apiMaps: ApiMaps) :MapRepository {
             emit(Result.Error(e.message ?: "Terjadi kesalahan pada pengambilan data map"))
         }
     }
-
-
-    override fun getImage(photo_reference: String, api_key: String):LiveData<Result<ResponseBody>> =
-        liveData {
-            emit(Result.Loading)
-            try {
-                apiMaps.getPhoto(photo_reference, api_key ).let {
-                    if (it.isSuccessful) {
-                        val body = it.body()!!
-                        emit(Result.Success(body))
-                    } else {
-                        val errorMessage = it.getError<ErrorResponse>().msg
-                        emit(Result.Error(errorMessage))
-                    }
-                }
-        } catch (e: Exception) {
-            emit(Result.Error(e.message ?: "Terjadi kesalahan pada pengambilan data map"))
-            }
-        }
 }
