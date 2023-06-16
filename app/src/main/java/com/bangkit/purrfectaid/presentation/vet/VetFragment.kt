@@ -94,7 +94,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                         val latLng = LatLng(location.latitude, location.longitude)
                         googleMap.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
-                                latLng, 70f
+                                latLng, 120f
                             )
                         )
                         fetchNearbyVetLocations(latLng)
@@ -124,15 +124,9 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                         val location = LatLng(i.geometry.location.lat as Double,
                             i.geometry.location.lng as Double
                         )
-
                         nameList.add(i.name)
                         for(photo in i.photos){
-                            viewModel.getImage(photo.photoReference, getString(R.string.maps_api_key)).observe(viewLifecycleOwner){
-                                res ->
-                                Log.d("TAGUT", res.toString())
-                                getPhoto(res)
-                            }
-                            avatarList.add(photo.htmlAttributions[0])
+                            avatarList.add(photo.photoReference)
                         }
 
                         val markerOptions =
@@ -156,18 +150,6 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun getPhoto(res: Result<ResponseBody>) {
-        when(res){
-            is Result.Success ->{
-                Log.d(TAG, res.data.byteStream().toString())
-            }
-            is Result.Error -> {
-                Log.e("FETCHING PHOTO ERROR", "err: ${res.errorMessage}")
-            }
-            Result.Loading -> {
-            }
-        }
-    }
 
     private fun showBottomDialog() {
 

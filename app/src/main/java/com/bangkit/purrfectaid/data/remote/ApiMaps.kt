@@ -15,11 +15,4 @@ interface ApiMaps {
         @Query("keyword") keyword: String,
         @Query("key") apiKey: String
     ): Response<MapResponse>
-
-    @GET("photo")
-    suspend fun getPhoto(
-        @Query("photo_reference") photo_reference : String,
-        @Query("key") apiKey: String
-    ):Response<ResponseBody>
-
 }
