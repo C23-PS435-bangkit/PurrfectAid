@@ -133,7 +133,7 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ### Minimum Requirements
 
-- Android 5.0 (lollipop) or newest
+- Android 11.0 (Red Velvet Cake) or newest
 - Internet Connection
 - Camera Access
 
@@ -154,23 +154,12 @@ _Below is an example of how you can instruct your audience on installing and set
     - The result of the animal disease scan can up to 3s
     - The system can be accessed in any area
     - The system has a user-friendly interface
-<!-- USAGE EXAMPLES
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
--->
-
-
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 <p align="center">
-  <img src="https://i.ibb.co/xFg4JLH/bangkit.png" height="200"></img>&nbsp; &nbsp;<img src="https://i.ibb.co/MNHjhZY/wastecreative.png" height="200">
+  <img src="https://i.ibb.co/xFg4JLH/bangkit.png" height="200"></img>
 </p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
