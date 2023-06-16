@@ -39,6 +39,7 @@ import okhttp3.Response
 import okio.BufferedSink
 import okio.IOException
 import org.json.JSONObject
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -124,26 +125,59 @@ class LoginFragment : Fragment() {
         try {
             val acc = task.getResult(ApiException::class.java)
 
-            Log.d("DATA", """
+            Log.d(
+                "DATA", """
                 ${acc.id},
                 ${acc.account}
                 ${acc.email}
                 ${acc.givenName}
                 ${acc.photoUrl}
-            """.trimIndent())
+            """.trimIndent()
+            )
+
+            sendGoogleDataToApiForLogin(acc!!)
         } catch (e: ApiException) {
             Toast.makeText(requireContext(), "Gagal login dengan google", Toast.LENGTH_SHORT).show()
             Log.e("Login Google", "Error: $e")
         }
     }
 
-    private fun sendGoogleDataToApiForLogin(data: SignInCredential) {
-//        val loginGoogleRequest = LoginGoogleRequest(
-//            id = ,
-//            email = data.id,
-//            name = data.givenName
-//        )
+    private fun sendGoogleDataToApiForLogin(acc: GoogleSignInAccount) {
+
+        val loginGoogleRequest = LoginGoogleRequest(
+            google_id = Random.nextInt(2000, 100000),
+            google_email = acc.email!!,
+            google_name = acc.givenName!!,
+            google_picture = acc.photoUrl.toString()
+        )
+
+        viewModel.loginGoogle(loginGoogleRequest).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    hideLoading()
+                    Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT)
+                        .show()
+                    val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                    findNavController().navigate(toHome)
+                }
+
+                is Result.Loading -> {
+                    showLoading()
+                }
+
+                is Result.Error -> {
+                    hideLoading()
+                    Log.e("LOGIN GOOGLE", it.errorMessage)
+                    Toast.makeText(
+                        requireContext(),
+                        "Gagal login dengan google, silahkan coba lagi!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
+
 
     private fun setupView() {
         binding.btnToRegister.setOnClickListener {
@@ -172,7 +206,8 @@ class LoginFragment : Fragment() {
                 is Result.Success -> {
                     if (it.data.status == 200) {
                         hideLoading()
-                        Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT)
+                            .show()
                         val toHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         findNavController().navigate(toHome)
                     }
@@ -193,7 +228,7 @@ class LoginFragment : Fragment() {
 
     private fun showLoading() {
         binding.loadingBar.visibility = View.VISIBLE
-        binding.loadingBar.setOnClickListener {  }
+        binding.loadingBar.setOnClickListener { }
     }
 
     private fun hideLoading() {

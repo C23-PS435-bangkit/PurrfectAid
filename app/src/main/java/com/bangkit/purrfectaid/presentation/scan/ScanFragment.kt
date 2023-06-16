@@ -122,7 +122,7 @@ class ScanFragment : Fragment() {
                 }
 
                 is Result.Loading -> {
-
+                    showLoading()
                 }
 
                 is Result.Error -> {
