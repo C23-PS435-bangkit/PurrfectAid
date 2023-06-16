@@ -8,7 +8,6 @@ import com.bangkit.purrfectaid.domain.repository.CommunityRepository
 import com.bangkit.purrfectaid.domain.repository.DataStoreRepository
 import com.bangkit.purrfectaid.domain.repository.PredictRepository
 import com.bangkit.purrfectaid.utils.Constants.BASE_URL
-import com.bangkit.purrfectaid.utils.Constants.PREDICT_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,7 +21,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -32,18 +30,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideLoggingInterceptor() = if (BuildConfig.DEBUG) {
-//        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-//    } else {
-//        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-//    }
-
     @Provides
     fun provideApiPredictInstance(loggingInterceptor: HttpLoggingInterceptor) : ApiPredict =
         Retrofit.Builder()
-            .baseUrl(PREDICT_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()

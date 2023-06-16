@@ -18,14 +18,11 @@ class PredictRepositoryImpl (private val api: ApiPredict) : PredictRepository {
         emit(Result.Loading)
         try {
             api.predict(image).let {
+                val body = it.body()!!
                 if (it.isSuccessful) {
-                    Log.d("DATASA", it.message())
-                    val body = it.body().toString().replace("\"", "")
-                    Log.d("DATADATA", body.toString())
-                    emit(Result.Success(it.body()!!))
+                    emit(Result.Success(body.data!!))
                 } else {
-                    Log.e("ERROR PREDICTSI", it.message() + it.errorBody())
-                    emit(Result.Error(it.message()))
+                    emit(Result.Error(body.message))
                 }
             }
         } catch (e: Exception) {

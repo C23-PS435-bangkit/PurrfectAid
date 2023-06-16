@@ -5,14 +5,18 @@ import android.os.Handler
 import android.os.Looper
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bangkit.purrfectaid.databinding.ActivityMainBinding
+import com.bangkit.purrfectaid.presentation.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val graph = inflater.inflate(R.navigation.main_navigation)
 
         lifecycleScope.launch {
-            if (viewModel.getToken() != null) {
+            if (viewModel.getToken() != "") {
                 graph.setStartDestination(R.id.homeFragment)
                 navHost.navController.graph = graph
             } else {
@@ -63,7 +67,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val currentFragment = navHost.navController.currentDestination
+                lifecycleScope.launch {
+                    if (currentFragment?.id == R.id.homeFragment) {
+                        Log.d("BISAGA", "BISA")
+                        finish()
+                    } else {
+                        Log.d("BISAGA", "GAK")
+                        navHost.navController.navigateUp()
+                    }
+                }
+            }
+        })
     }
+
+
 
 
     override fun onSupportNavigateUp(): Boolean {

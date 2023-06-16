@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_profileFragment_to_openingFirstFragment"
             app:destination="@id/openingFirstFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/openingFirstFragment"
@@ -125,5 +128,14 @@
         <argument
             android:name="result"
             app:argType="com.bangkit.purrfectaid.domain.model.Predict" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.bangkit.purrfectaid.presentation.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_openingFirstFragment"
+            app:destination="@id/openingFirstFragment" />
     </fragment>
 </navigation>

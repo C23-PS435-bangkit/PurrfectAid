@@ -1,5 +1,6 @@
 package com.bangkit.purrfectaid.data.remote
 
+import com.bangkit.purrfectaid.data.remote.response.PredictResponse
 import com.bangkit.purrfectaid.domain.model.Predict
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -16,5 +17,5 @@ interface ApiPredict {
     @POST("predict")
     suspend fun predict(
         @Part images: MultipartBody.Part
-    ) : Response<Predict>
+    ) : Response<PredictResponse>
 }
