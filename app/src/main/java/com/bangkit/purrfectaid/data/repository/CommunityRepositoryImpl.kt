@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.bangkit.purrfectaid.data.remote.ApiCommunity
 import com.bangkit.purrfectaid.domain.model.InsertPostRequest
-import com.bangkit.purrfectaid.domain.model.InsertPost
 import com.bangkit.purrfectaid.domain.model.Post
 import com.bangkit.purrfectaid.domain.repository.CommunityRepository
 import com.bangkit.purrfectaid.utils.Result
@@ -15,7 +14,7 @@ import com.bangkit.purrfectaid.utils.Result
  */
 class CommunityRepositoryImpl (private val api: ApiCommunity) : CommunityRepository {
 
-    override fun insertPost(insertPostRequest: InsertPostRequest): LiveData<Result<InsertPost>> = liveData {
+    override fun insertPost(insertPostRequest: InsertPostRequest): LiveData<Result<InsertPostRequest>> = liveData {
         emit(Result.Loading)
         try {
             api.insertPost(insertPostRequest).let {

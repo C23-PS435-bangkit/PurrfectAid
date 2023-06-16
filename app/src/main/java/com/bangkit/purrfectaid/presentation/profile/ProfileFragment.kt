@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.purrfectaid.MainViewModel
+import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentProfileBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -46,12 +51,31 @@ class ProfileFragment : Fragment() {
             tvEmail.text = dataUser?.user_email
         }
 
+        val sectionsPagerAdapter = ProfileSectionPagerAdapter(requireActivity() as AppCompatActivity)
+
+        val viewPager: ViewPager2 = binding.viewPager
+        viewPager.adapter = sectionsPagerAdapter
+        val tabs: TabLayout = binding.tabs
+
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.setIcon(TAB_ICON[position])
+        }.attach()
+
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+
+        private val TAB_ICON = arrayOf(
+            R.drawable.post_profile,
+            R.drawable.saved_post,
+            R.drawable.saved_diagnose
+        )
     }
 
 }

@@ -14,11 +14,16 @@ import android.view.Window
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.BottomSheetLayoutBinding
 import com.bangkit.purrfectaid.databinding.FragmentVetBinding
+import com.bangkit.purrfectaid.domain.model.MapRequest
+import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseBottomSheet
 import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseFragment
+import com.bangkit.purrfectaid.presentation.scan.ScanViewModel
+import com.bangkit.purrfectaid.utils.Result
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -39,7 +44,9 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VetFragment : Fragment(), OnMapReadyCallback {
 
     private var _binding : FragmentVetBinding? =null
@@ -50,12 +57,15 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     private lateinit var placeClient: PlacesClient
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val viewModel: VetViewModel by viewModels()
+
 
     //    For the dummy recycle view now
     private lateinit var adapter: VetAdapter
     private lateinit var recycleView: RecyclerView
     private var nameList = ArrayList<String>()
     private var avatarList = ArrayList<Drawable>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +74,8 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         _binding = FragmentVetBinding.inflate(inflater, container, false)
         val mapFragment= childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+
 
         Places.initialize(requireContext(), getString(R.string.maps_api_key))
         placeClient = Places.createClient(requireContext())
@@ -79,6 +91,15 @@ class VetFragment : Fragment(), OnMapReadyCallback {
 
         return binding.root
     }
+    private val requestPermission =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ){
+                isGranted: Boolean ->
+            if(isGranted){
+                getMyLocation()
+            }
+        }
 
     private fun showBottomDialog() {
 
@@ -102,17 +123,6 @@ class VetFragment : Fragment(), OnMapReadyCallback {
 
         bottomSheetDialog.show()
     }
-
-
-    private val requestPermission =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ){
-                isGranted: Boolean ->
-            if(isGranted){
-                getMyLocation()
-            }
-        }
 
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
@@ -150,65 +160,38 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun fetchNearbyVetLocations(latLng:LatLng) {
-
-        val bounds = RectangularBounds.newInstance(
-            LatLng(latLng.latitude-0.1, latLng.longitude-0.1), // Southwest coordinate of Medan
-            LatLng(latLng.latitude+0.1, latLng.longitude+0.1) // Northeast coordinate of Medan
+        val request = MapRequest(
+            "${latLng.latitude},${latLng.longitude}",
+            50000,
+            "veterinary ",
+            getString(R.string.maps_api_key)
         )
-//        val bounds = RectangularBounds.newInstance(
-//            LatLng(3.508582, 98.622499), // Southwest coordinate of Medan
-//            LatLng(3.644217, 98.737114) // Northeast coordinate of Medan
-//        )
+        viewModel.getLocation(request).observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Success -> {
+                    val results = it.data.results
+                    for (i in results) {
+                        val location = LatLng(i.geometry.location.lat as Double,
+                            i.geometry.location.lng as Double
+                        )
+                        val markerOptions =
+                            MarkerOptions()
+                                    .position(location)
+                                    .title(i.name)
+                                    .snippet(i.vicinity)
+                        googleMap.addMarker(markerOptions)
+                    }
+                }
+                is Result.Loading -> {
 
-        val token = AutocompleteSessionToken.newInstance()
-        val request = FindAutocompletePredictionsRequest.builder()
-            .setLocationBias(bounds)
-            .setOrigin(latLng)
-            .setTypesFilter(listOf(PlaceTypes.VETERINARY_CARE))
-            .setSessionToken(token)
-            .setQuery("veterinary")
-            .build()
-
-        placeClient.findAutocompletePredictions(request)
-            .addOnSuccessListener { response:FindAutocompletePredictionsResponse ->
-                Log.e(TAG, response.autocompletePredictions.toString())
-                for (prediction in response.autocompletePredictions) {
-                    Log.e(TAG, prediction.placeId)
-                    Log.e(TAG, prediction.getPrimaryText(null).toString())
-                    val placeId = prediction.placeId
-
-                    val placeFields = listOf(Place.Field.LAT_LNG)
-                    val fetchPlaceRequest = FetchPlaceRequest.builder(placeId, placeFields).build()
-
-                    placeClient.fetchPlace(fetchPlaceRequest)
-                        .addOnSuccessListener {
-                                fetchPlaceResponse->
-                            val place = fetchPlaceResponse.place
-                            val placeLatLng = place.latLng
-
-                            if (placeLatLng != null) {
-                                val placeLatitude = placeLatLng.latitude
-                                val placeLongitude = placeLatLng.longitude
-                                Log.e(TAG, "Place Latitude: $placeLatitude, Longitude: $placeLongitude")
-                                val placeName = prediction.getPrimaryText(null).toString()
-                                val placeAddress = prediction.getSecondaryText(null).toString()
-
-                                val markerOptions = placeLatLng.let {
-                                    MarkerOptions()
-                                        .position(it)
-                                        .title(placeName)
-                                        .snippet(placeAddress)
-                                }
-                                googleMap.addMarker(markerOptions)
-                            }
-
-                        }
+                }
+                is Result.Error -> {
+                    Log.e("MAP ERROR", "err: ${it.errorMessage}")
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.e(TAG, "Failed to fetch nearby veterinary locations: ${exception.message}")
-            }
+        }
     }
+
     companion object{
         private const val TAG =".VetFragment"
     }

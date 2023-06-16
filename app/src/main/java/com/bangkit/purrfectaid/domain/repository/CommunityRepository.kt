@@ -2,7 +2,6 @@ package com.bangkit.purrfectaid.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.bangkit.purrfectaid.domain.model.InsertPostRequest
-import com.bangkit.purrfectaid.domain.model.InsertPost
 import com.bangkit.purrfectaid.domain.model.Post
 import com.bangkit.purrfectaid.utils.Result
 
@@ -11,6 +10,6 @@ import com.bangkit.purrfectaid.utils.Result
  */
 interface CommunityRepository {
 
-    fun insertPost(insertPostRequest: InsertPostRequest) : LiveData<Result<InsertPost>>
+    fun insertPost(insertPostRequest: InsertPostRequest) : LiveData<Result<InsertPostRequest>>
     fun getAllPost() : LiveData<Result<List<Post>>>
 }
