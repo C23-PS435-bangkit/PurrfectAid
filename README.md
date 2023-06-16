@@ -21,7 +21,7 @@
 
   <p align="center">
     <img src="https://img.shields.io/badge/Team-PurrfectAid-9e83fc">
-    <img src="https://img.shields.io/badge/C22-PS061-9e83fc?">
+    <img src="https://img.shields.io/badge/C23-PS435-9e83fc?">
   </p>
 
   <h1 align="center">PurrfectAid</h1>
@@ -72,7 +72,6 @@ efficient care for these animals in need.
 
 
 ### Built With
-
 This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Kotlin](https://developer.android.com/kotlin)
@@ -114,12 +113,12 @@ _Below is an example of how you can instruct your audience on installing and set
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Application
-
-![Screenshot]()
+<p align="center">
+  <img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/371af31b-6a6b-4990-ab72-f8c40f609658" width="300" height="650" alt="home"></img>&nbsp; &nbsp;<img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/951e8b4c-f838-4d0d-a6e3-31528f6ccaa3" width="300" height="650" alt="login">&nbsp; &nbsp;<img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/d3afe800-22bb-41fc-8afe-5bac3823afb9" width="300" height="650" alt="register">
+</p>
 
 <p align="center">
-
-  <img href="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/1817c236-5599-4d14-9bf2-10f516195810" height="500"></img>&nbsp; &nbsp;<img src="assets/home.png" height="500">&nbsp; &nbsp;<img src="assets/recom_list.png" height="500">
+  <img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/7df2230a-8bd6-4666-9fbd-4d880c66b026" width="300" height="650" alt="nearest_vet"></img>&nbsp; &nbsp;<img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/5b1bccc2-9d34-410f-95e4-1cf2bf42754d" width="300" height="650" alt="scan_vet">&nbsp; &nbsp;<img src="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/f763faaa-6e0d-4512-95a7-7a114520563a" width="300" height="650" alt="scanning">
 </p>
 
 ### Minimum Requirements
