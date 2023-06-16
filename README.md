@@ -9,10 +9,6 @@
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -32,14 +28,8 @@
 
   <p align="center">
     Scan, Heal, Purrfect Aid reveals, for every animal's skin it appeals!
-    <!-- <br /> -->
-    <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the Projects »</strong></a> -->
     <br />
-    <a href="https://github.com/kadabengarann/waste-creative" target="_blank">APK Demo</a>
-    ·
-    <a href="https://github.com/kadabengarann/waste-creative/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/kadabengarann/waste-creative/issues">Request Feature</a>
+    <a href="https://github.com/C23-PS435-bangkit/PurrfectAid" target="_blank">APK Demo</a>
   </p>
 
 
@@ -128,7 +118,8 @@ _Below is an example of how you can instruct your audience on installing and set
 ![Screenshot]()
 
 <p align="center">
-  <img src="assets/splash.png" height="500"></img>&nbsp; &nbsp;<img src="assets/home.png" height="500">&nbsp; &nbsp;<img src="assets/recom_list.png" height="500">
+
+  <img href="https://github.com/C23-PS435-bangkit/PurrfectAid/assets/87352987/1817c236-5599-4d14-9bf2-10f516195810" height="500"></img>&nbsp; &nbsp;<img src="assets/home.png" height="500">&nbsp; &nbsp;<img src="assets/recom_list.png" height="500">
 </p>
 
 ### Minimum Requirements
@@ -165,16 +156,9 @@ _Below is an example of how you can instruct your audience on installing and set
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/kadabengarann/waste-creative.svg?style=flat
-[contributors-url]: https://github.com/kadabengarann/waste-creative/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/kadabengarann/waste-creative?style=flat
-[forks-url]: https://github.comkadabengarann/waste-creative/network/members
-[stars-shield]: https://img.shields.io/github/stars/kadabengarann/waste-creative.svg?style=flat
-[stars-url]: https://github.com/kadabengarann/waste-creative/stargazers
-[issues-shield]: https://img.shields.io/github/issues/kadabengarann/waste-creative.svg?style=flat
-[issues-url]: https://github.com/kadabengarann/waste-creative/issues
-[license-shield]: https://img.shields.io/github/license/kadabengarann/waste-creative.svg?style=flat
-[license-url]: https://github.com/kadabengarann/waste-creative/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/C23-PS435-bangkit/PurrfectAid.svg?style=flat
+[contributors-url]: https://github.com/C23-PS435-bangkit/PurrfectAid/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/C23-PS435-bangkit/PurrfectAid?style=flat
+[forks-url]: https://github.com/C23-PS435-bangkit/PurrfectAid/fork
