@@ -80,28 +80,10 @@ class RegisterFragment : Fragment() {
         }
 
         binding.btnRegisterWithGoogle.setOnClickListener {
-//            viewModel.registerOrLoginWithGoogle().observe(viewLifecycleOwner) {
-//                when (it) {
-//                    is Result.Success -> {
-//                        Toast.makeText(requireContext(), it.data.msg, Toast.LENGTH_SHORT).show()
-//                        val toHome =
-//                            RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
-//                        findNavController().navigate(toHome)
-//                    }
-//
-//                    is Result.Loading -> {
-//
-//                    }
-//
-//                    is Result.Error -> {
-//                        Log.e("Error Register Google", "Error: ${it.errorMessage}")
-//                    }
-//                }
-//            }
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(BASE_URL + "users/google"))
-            startActivity(browserIntent)
-//            val toAuthGoogle = RegisterFragmentDirections.actionRegisterFragmentToAuthGoogleFragment()
-//            findNavController().navigate(toAuthGoogle)
+//            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(BASE_URL + "users/google"))
+//            startActivity(browserIntent)
+////            val toAuthGoogle = RegisterFragmentDirections.actionRegisterFragmentToAuthGoogleFragment()
+////            findNavController().navigate(toAuthGoogle)
         }
 
     }

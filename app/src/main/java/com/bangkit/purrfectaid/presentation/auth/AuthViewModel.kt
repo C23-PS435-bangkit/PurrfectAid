@@ -1,6 +1,7 @@
 package com.bangkit.purrfectaid.presentation.auth
 
 import androidx.lifecycle.ViewModel
+import com.bangkit.purrfectaid.domain.model.LoginGoogleRequest
 import com.bangkit.purrfectaid.domain.model.LoginRequest
 import com.bangkit.purrfectaid.domain.model.RegisterRequest
 import com.bangkit.purrfectaid.domain.repository.AuthRepository
@@ -14,6 +15,7 @@ class AuthViewModel @Inject constructor(private val repo: AuthRepository) : View
     fun login(loginRequest: LoginRequest) = repo.login(loginRequest)
     fun register(registerRequest: RegisterRequest) = repo.register(registerRequest)
 
+//    fun loginGoogle(loginGoogleRequest: LoginGoogleRequest)
 
 //    fun sendUser()
 }

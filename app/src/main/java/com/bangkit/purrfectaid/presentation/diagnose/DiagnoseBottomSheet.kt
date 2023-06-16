@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bangkit.purrfectaid.databinding.DiagnoseSheetLayoutBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 /**
@@ -21,11 +22,28 @@ class DiagnoseBottomSheet : BottomSheetDialogFragment() {
     ): View {
         binding = DiagnoseSheetLayoutBinding.inflate(inflater, container, false)
 
+        val isFromDiagnoseHistory = requireArguments().getBoolean("isFromDiagnoseHistory")
+
         val diagnose = requireArguments().getString("diagnose")
         val treatment = requireArguments().getString("treatment")
 
         binding.tvDiagnoseTitle.text = diagnose
         binding.tvDiagnoseTreatment.text = treatment
+
+        if (isFromDiagnoseHistory) {
+            val image = requireArguments().getString("imageDiagnose")
+
+            Glide
+                .with(binding.root)
+                .load(image)
+                .into(binding.ivDiagnoseImage)
+
+            binding.ivDiagnoseImage.visibility = View.VISIBLE
+        } else {
+            binding.ivDiagnoseImage.visibility = View.GONE
+        }
+
+
 
         return binding.root
     }

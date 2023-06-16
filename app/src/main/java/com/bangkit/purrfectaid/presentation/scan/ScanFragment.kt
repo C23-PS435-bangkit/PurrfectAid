@@ -57,11 +57,19 @@ class ScanFragment : Fragment() {
         }
 
         binding.btnScan.setOnClickListener {
+            showLoading()
             takeImage()
         }
     }
 
+    private fun showLoading() {
+        binding.loadingBar.visibility = View.VISIBLE
+        binding.loadingBar.setOnClickListener {  }
+    }
 
+    private fun hideLoading() {
+        binding.loadingBar.visibility = View.GONE
+    }
 
     private fun takeImage() {
         val imageCap = imageCapture
@@ -102,20 +110,15 @@ class ScanFragment : Fragment() {
         viewModel.predict(image).observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> {
+                    hideLoading()
                     Log.d("BERHASIL", it.data.toString())
-//                    val toDiagnose = ScanFragmentDirections.actionScanFragmentToDiagnoseFragment(it.data)
-//                    findNavController().navigate(toDiagnose)
-
-//                    val bottomSheetDialog = BottomSheetDialog()
-//
-//                    val diagnoseTitle = diagnoseSheet.bin
                     val diagnoseSheet = DiagnoseBottomSheet()
                     val bundle = Bundle()
                     bundle.putString("diagnose", it.data.diagnose)
                     bundle.putString("treatment", it.data.treatment)
+                    bundle.putBoolean("isFromDiagnoseHistory", false)
                     diagnoseSheet.arguments = bundle
                     diagnoseSheet.show(childFragmentManager, "Expanded")
-
                 }
 
                 is Result.Loading -> {
@@ -123,6 +126,8 @@ class ScanFragment : Fragment() {
                 }
 
                 is Result.Error -> {
+                    hideLoading()
+                    Toast.makeText(requireContext(), "Gagal mengirimkan gambar, cek koneksi anda", Toast.LENGTH_SHORT).show()
                     Log.e("ERROR PREDICT", "err: ${it.errorMessage}")
                 }
             }

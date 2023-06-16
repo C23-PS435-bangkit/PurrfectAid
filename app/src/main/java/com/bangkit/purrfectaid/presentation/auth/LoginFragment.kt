@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bangkit.purrfectaid.databinding.FragmentLoginBinding
+import com.bangkit.purrfectaid.domain.model.LoginGoogleRequest
 import com.bangkit.purrfectaid.domain.model.LoginRequest
 import com.bangkit.purrfectaid.utils.Constants.BASE_URL
 import com.bangkit.purrfectaid.utils.Result
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.identity.SignInCredential
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.gson.Gson
@@ -73,6 +75,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun signInGoogle() {
+        Log.d("LOGIN", "GOOGLE")
         oneTapClient.beginSignIn(signInRequest)
             .addOnSuccessListener(requireActivity()) { res ->
                 try {
@@ -89,14 +92,6 @@ class LoginFragment : Fragment() {
             }
     }
 
-//    val intentSender = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-//        if (it.resultCode == Activity.RESULT_OK) {
-//            try {
-//
-//            }
-//        }
-//    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -105,10 +100,10 @@ class LoginFragment : Fragment() {
             400 -> {
                 try {
                     val credential = oneTapClient.getSignInCredentialFromIntent(data)
-                    val idToken = credential.id
-                    loginWithGoogle(idToken)
+//                    val idToken = credential.
 
-                    Log.d("DATA", credential.displayName.toString())
+
+                    Log.d("DATA", " ${credential.displayName} + ${credential.familyName} + ${credential.givenName}")
                 } catch (e: ApiException) {
                     Log.e("GAGAl", e.toString())
                 }
@@ -116,39 +111,12 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun loginWithGoogle(idToken: String) {
-        val requestBody = object : RequestBody() {
-            override fun contentType(): MediaType {
-                return "application/json; charset=utf-8".toMediaType()
-            }
-
-            override fun writeTo(sink: BufferedSink) {
-                val json = Gson().toJson(mapOf("email" to idToken))
-                sink.write(json.toByteArray())
-            }
-        }
-
-
-        val request = Request.Builder()
-            .url(BASE_URL + "users/protected")
-            .post(requestBody)
-            .build()
-
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("LOGINWITHGOOGLE", "Failed: $e")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseBody = response.body.string()
-                Log.d("RESPO", responseBody)
-                val jsonObject = JSONObject(responseBody)
-                val token = jsonObject.getString("token")
-                Log.d("TOKEN", token)
-            }
-        })
-
+    private fun sendGoogleDataToApiForLogin(data: SignInCredential) {
+//        val loginGoogleRequest = LoginGoogleRequest(
+//            id = ,
+//            email = data.id,
+//            name = data.givenName
+//        )
     }
 
     private fun setupView() {

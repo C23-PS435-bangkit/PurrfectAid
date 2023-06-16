@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.purrfectaid.MainViewModel
 import com.bangkit.purrfectaid.R
@@ -30,18 +31,6 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-//        binding.btnLogout.setOnClickListener {
-//            lifecycleScope.launch {
-//                if (viewModel.logout()) {
-//                    Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show()
-//                    val toOpening = ProfileFragmentDirections.actionProfileFragmentToOpeningFirstFragment()
-//                    findNavController().navigate(toOpening)
-//                } else {
-//                    Toast.makeText(requireContext(), "Gagal logout", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-
         val sectionsPagerAdapter = ProfileSectionPagerAdapter(requireActivity() as AppCompatActivity)
 
         val viewPager: ViewPager2 = binding.viewPager
@@ -56,6 +45,11 @@ class ProfileFragment : Fragment() {
         binding.apply {
             tvName.text = dataUser?.user_name
             tvEmail.text = dataUser?.user_email
+        }
+
+        binding.btnSettings.setOnClickListener {
+            val toSettings = ProfileFragmentDirections.actionProfileFragmentToSettingsFragment()
+            findNavController().navigate(toSettings)
         }
 
         return binding.root

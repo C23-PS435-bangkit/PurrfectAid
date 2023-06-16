@@ -5,7 +5,7 @@ package com.bangkit.purrfectaid.utils
  */
 object Constants {
 
-    const val BASE_URL = "http://10.0.2.2:3000/"
+    const val BASE_URL = "https://purrfectaidapi-fix2-lm7kyez5ua-et.a.run.app/"
     const val DATA_USER = "data_user"
     const val DATA_TOKEN = "data_token"
     const val MAP_URL = "https://maps.googleapis.com/maps/api/place/"

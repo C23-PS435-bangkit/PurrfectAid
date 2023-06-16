@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.purrfectaid.MainViewModel
 import com.bangkit.purrfectaid.R
 import com.bangkit.purrfectaid.databinding.FragmentHomeBinding
+import com.bangkit.purrfectaid.domain.model.Diagnose
+import com.bangkit.purrfectaid.presentation.diagnose.DiagnoseBottomSheet
 import com.bangkit.purrfectaid.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,6 +62,20 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        adapter.setOnUserClickDiagnoseCallback(object : DiagnoseHistoryAdapter.OnUserClickDiagnoseCallback {
+            override fun onUserClickDiagnose(data: Diagnose) {
+                val diagnoseBottomSheet = DiagnoseBottomSheet()
+                val bundle = Bundle()
+                bundle.putString("diagnose", data.scanDiagnose)
+                bundle.putString("treatment", data.scanTreatment)
+                bundle.putString("imageDiagnose", data.scanPict)
+                bundle.putBoolean("isFromDiagnoseHistory", true)
+                diagnoseBottomSheet.arguments = bundle
+                diagnoseBottomSheet.show(childFragmentManager, "Expanded")
+            }
+        })
+
 
         return binding.root
     }

@@ -67,10 +67,8 @@ class MainActivity : AppCompatActivity() {
                 val currentFragment = navHost.navController.currentDestination
                 lifecycleScope.launch {
                     if (currentFragment?.id == R.id.homeFragment) {
-                        Log.d("BISAGA", "BISA")
                         finish()
                     } else {
-                        Log.d("BISAGA", "GAK")
                         navHost.navController.navigateUp()
                     }
                 }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
  */
 class DiagnoseHistoryAdapter : RecyclerView.Adapter<DiagnoseHistoryAdapter.DiagnoseViewHolder>() {
     private var listDiagnose = arrayListOf<Diagnose>()
+    private lateinit var onDiagnoseClickCallback: OnUserClickDiagnoseCallback
 
     inner class DiagnoseViewHolder(var binding: ItemCardDiagnoseBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -37,8 +38,20 @@ class DiagnoseHistoryAdapter : RecyclerView.Adapter<DiagnoseHistoryAdapter.Diagn
                 .with(holder.binding.root)
                 .load(data.scanPict)
                 .into(ivDiagnose)
+
+            root.setOnClickListener {
+                onDiagnoseClickCallback.onUserClickDiagnose(data)
+            }
         }
     }
 
     override fun getItemCount(): Int = listDiagnose.size
+
+    interface OnUserClickDiagnoseCallback {
+        fun onUserClickDiagnose(data: Diagnose)
+    }
+
+    fun setOnUserClickDiagnoseCallback(onUserClickDiagnoseCallback: OnUserClickDiagnoseCallback) {
+        this.onDiagnoseClickCallback = onUserClickDiagnoseCallback
+    }
 }

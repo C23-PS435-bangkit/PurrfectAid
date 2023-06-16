@@ -84,9 +84,6 @@ dependencies {
     // DataStore
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
-    // Decode JWT
-    implementation 'com.auth0.android:jwtdecode:2.0.2'
-
     // Google sign in
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
 

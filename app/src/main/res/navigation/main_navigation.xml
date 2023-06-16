@@ -30,11 +30,12 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_openingFirstFragment"
-            app:destination="@id/openingFirstFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/anim_back_from_right"
+            app:exitAnim="@anim/anim_exit_to_left"
+            app:popEnterAnim="@anim/anim_back_from_left"
+            app:popExitAnim="@anim/anim_exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/openingFirstFragment"

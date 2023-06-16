@@ -34,7 +34,7 @@ import okhttp3.ResponseBody
 @AndroidEntryPoint
 class VetFragment : Fragment(), OnMapReadyCallback {
 
-    private var _binding : FragmentVetBinding? =null
+    private var _binding: FragmentVetBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBinding: BottomSheetLayoutBinding
     private lateinit var googleMap: GoogleMap
@@ -54,10 +54,11 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentVetBinding.inflate(inflater, container, false)
-        val mapFragment= childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
         showBottomDialog()
 
         return binding.root
@@ -66,7 +67,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
         googleMap.uiSettings.isCompassEnabled = true
-        googleMap.uiSettings.isZoomControlsEnabled =true
+        googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isMapToolbarEnabled = true
         getMyLocation()
     }
@@ -74,9 +75,8 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     private val requestPermission =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
-        ){
-                isGranted: Boolean ->
-            if(isGranted){
+        ) { isGranted: Boolean ->
+            if (isGranted) {
                 getMyLocation()
             }
         }
@@ -87,7 +87,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            googleMap.isMyLocationEnabled=true
+            googleMap.isMyLocationEnabled = true
             fusedLocationProviderClient.lastLocation
                 .addOnSuccessListener { location ->
                     location?.let {
@@ -108,7 +108,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun fetchNearbyVetLocations(latLng:LatLng) {
+    private fun fetchNearbyVetLocations(latLng: LatLng) {
         val request = MapRequest(
             "${latLng.latitude},${latLng.longitude}",
             50000,
@@ -121,14 +121,17 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                 is Result.Success -> {
                     val results = it.data.results
                     for (i in results) {
-                        val location = LatLng(i.geometry.location.lat as Double,
+                        val location = LatLng(
+                            i.geometry.location.lat as Double,
                             i.geometry.location.lng as Double
                         )
 
                         nameList.add(i.name)
-                        for(photo in i.photos){
-                            viewModel.getImage(photo.photoReference, getString(R.string.maps_api_key)).observe(viewLifecycleOwner){
-                                res ->
+                        for (photo in i.photos) {
+                            viewModel.getImage(
+                                photo.photoReference,
+                                getString(R.string.maps_api_key)
+                            ).observe(viewLifecycleOwner) { res ->
                                 Log.d("TAGUT", res.toString())
                                 getPhoto(res)
                             }
@@ -137,18 +140,20 @@ class VetFragment : Fragment(), OnMapReadyCallback {
 
                         val markerOptions =
                             MarkerOptions()
-                                    .position(location)
-                                    .title(i.name)
-                                    .snippet(i.vicinity)
+                                .position(location)
+                                .title(i.name)
+                                .snippet(i.vicinity)
                         googleMap.addMarker(markerOptions)
 
                         recycleView = bottomSheetBinding.rvNearestVet
-                        adapter = VetAdapter(nameList,avatarList)
-                        recycleView.adapter= adapter
+                        adapter = VetAdapter(nameList, avatarList)
+                        recycleView.adapter = adapter
                     }
                 }
+
                 is Result.Loading -> {
                 }
+
                 is Result.Error -> {
                     Log.e("MAP ERROR", "err: ${it.errorMessage}")
                 }
@@ -157,13 +162,15 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getPhoto(res: Result<ResponseBody>) {
-        when(res){
-            is Result.Success ->{
+        when (res) {
+            is Result.Success -> {
                 Log.d(TAG, res.data.byteStream().toString())
             }
+
             is Result.Error -> {
                 Log.e("FETCHING PHOTO ERROR", "err: ${res.errorMessage}")
             }
+
             Result.Loading -> {
             }
         }
@@ -188,7 +195,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    companion object{
-        private const val TAG =".VetFragment"
+    companion object {
+        private const val TAG = ".VetFragment"
     }
 }
