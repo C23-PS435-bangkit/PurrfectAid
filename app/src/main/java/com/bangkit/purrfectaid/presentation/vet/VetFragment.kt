@@ -94,7 +94,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
                         val latLng = LatLng(location.latitude, location.longitude)
                         googleMap.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(
-                                latLng, 70f
+                                latLng, 10f
                             )
                         )
                         fetchNearbyVetLocations(latLng)
@@ -128,14 +128,7 @@ class VetFragment : Fragment(), OnMapReadyCallback {
 
                         nameList.add(i.name)
                         for (photo in i.photos) {
-                            viewModel.getImage(
-                                photo.photoReference,
-                                getString(R.string.maps_api_key)
-                            ).observe(viewLifecycleOwner) { res ->
-                                Log.d("TAGUT", res.toString())
-                                getPhoto(res)
-                            }
-                            avatarList.add(photo.htmlAttributions[0])
+                            avatarList.add(photo.photoReference)
                         }
 
                         val markerOptions =

@@ -20,8 +20,12 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.identity.SignInCredential
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.Call
@@ -42,7 +46,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AuthViewModel by viewModels()
-//    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var oneTapClient: SignInClient
     private lateinit var signInRequest: BeginSignInRequest
 
@@ -57,6 +61,7 @@ class LoginFragment : Fragment() {
             .requestEmail()
             .build()
 
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         oneTapClient = Identity.getSignInClient(requireContext())
         signInRequest = BeginSignInRequest.builder()
@@ -75,21 +80,23 @@ class LoginFragment : Fragment() {
     }
 
     private fun signInGoogle() {
-        Log.d("LOGIN", "GOOGLE")
-        oneTapClient.beginSignIn(signInRequest)
-            .addOnSuccessListener(requireActivity()) { res ->
-                try {
-                    startIntentSenderForResult(
-                        res.pendingIntent.intentSender, 400,
-                        null, 0, 0, 0, null
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.e("GAKBISA", "ERRor: ${e.localizedMessage}")
-                }
-            }
-            .addOnFailureListener(requireActivity()) { e ->
-                Log.e("SAMA AJA", e.localizedMessage ?: "GAK BISA JUGA")
-            }
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, 400)
+//        Log.d("LOGIN", "GOOGLE")
+//        oneTapClient.beginSignIn(signInRequest)
+//            .addOnSuccessListener(requireActivity()) { res ->
+//                try {
+//                    startIntentSenderForResult(
+//                        res.pendingIntent.intentSender, 400,
+//                        null, 0, 0, 0, null
+//                    )
+//                } catch (e: IntentSender.SendIntentException) {
+//                    Log.e("GAKBISA", "ERRor: ${e.localizedMessage}")
+//                }
+//            }
+//            .addOnFailureListener(requireActivity()) { e ->
+//                Log.e("SAMA AJA", e.localizedMessage ?: "GAK BISA JUGA")
+//            }
     }
 
     @Deprecated("Deprecated in Java")
@@ -99,15 +106,34 @@ class LoginFragment : Fragment() {
         when (requestCode) {
             400 -> {
                 try {
-                    val credential = oneTapClient.getSignInCredentialFromIntent(data)
-//                    val idToken = credential.
-
-
-                    Log.d("DATA", " ${credential.displayName} + ${credential.familyName} + ${credential.givenName}")
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                    handleSignInResult(task)
+//                    val credential = oneTapClient.getSignInCredentialFromIntent(data)
+////                    val idToken = credential.
+//
+//
+//                    Log.d("DATA", " ${credential.displayName} + ${credential.familyName} + ${credential.givenName}")
                 } catch (e: ApiException) {
                     Log.e("GAGAl", e.toString())
                 }
             }
+        }
+    }
+
+    private fun handleSignInResult(task: Task<GoogleSignInAccount>) {
+        try {
+            val acc = task.getResult(ApiException::class.java)
+
+            Log.d("DATA", """
+                ${acc.id},
+                ${acc.account}
+                ${acc.email}
+                ${acc.givenName}
+                ${acc.photoUrl}
+            """.trimIndent())
+        } catch (e: ApiException) {
+            Toast.makeText(requireContext(), "Gagal login dengan google", Toast.LENGTH_SHORT).show()
+            Log.e("Login Google", "Error: $e")
         }
     }
 
